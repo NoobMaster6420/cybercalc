@@ -55,6 +55,11 @@ export default function Navbar() {
               <Link href="/ranking">
                 <a className="border-transparent hover:border-cyberaccent text-white hover:text-cyberaccent px-3 py-2 font-medium hover:bg-opacity-10 hover:bg-cyberaccent rounded-md transition duration-150">Ranking</a>
               </Link>
+              <Link href="/juegos">
+                <a className="border-transparent hover:border-cyberaccent text-white hover:text-cyberaccent px-3 py-2 font-medium hover:bg-opacity-10 hover:bg-cyberaccent rounded-md transition duration-150 flex items-center">
+                  <span className="mr-1">Video Juegos</span>
+                </a>
+              </Link>
             </div>
           </div>
           
@@ -113,6 +118,9 @@ export default function Navbar() {
           </Link>
           <Link href="/ranking">
             <a onClick={closeMenu} className="block px-3 py-2 rounded-md text-white font-medium hover:bg-cyberprimary hover:bg-opacity-20">Ranking</a>
+          </Link>
+          <Link href="/juegos">
+            <a onClick={closeMenu} className="block px-3 py-2 rounded-md text-white font-medium hover:bg-cyberprimary hover:bg-opacity-20">Video Juegos</a>
           </Link>
         </div>
         
