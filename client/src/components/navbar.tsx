@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
 import { Heart, Star, Menu, X } from 'lucide-react';
 import { UserProgress } from '@shared/schema';
+import { queryClient } from '@/lib/queryClient';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,6 +17,17 @@ export default function Navbar() {
     queryKey: ["/api/user/progress"],
     enabled: !!user,
   });
+  
+  // Effect para actualizar la caché del usuario cuando cambia el progreso
+  useEffect(() => {
+    if (user && userProgress) {
+      queryClient.setQueryData(["/api/user"], {
+        ...user,
+        points: userProgress.points,
+        lives: userProgress.lives
+      });
+    }
+  }, [userProgress, user]);
 
   const handleLogout = () => {
     logoutMutation.mutate();
