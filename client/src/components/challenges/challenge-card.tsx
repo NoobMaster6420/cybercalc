@@ -93,14 +93,21 @@ export default function ChallengeCard({
                   <motion.div
                     key={option.id}
                     className={`
-                      bg-cyberbg border ${selectedOption === option.id ? 'border-cyberaccent' : 'border-cyberprimary'} 
-                      p-3 rounded-md cursor-pointer hover:bg-cyberprimary hover:bg-opacity-20 transition
+                      bg-cyberbg border ${selectedOption === option.id ? 'border-2 border-cyberaccent shadow-[0_0_10px_rgba(167,139,250,0.5)]' : 'border-cyberprimary'} 
+                      p-3 rounded-md cursor-pointer hover:bg-cyberprimary hover:bg-opacity-20 transition relative
                     `}
                     onClick={() => onSelectOption(option.id)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <Latex formula={option.formula} />
+                    <div className="flex justify-between items-center">
+                      <Latex formula={option.formula} />
+                      {selectedOption === option.id && (
+                        <span className="ml-2 bg-cyberaccent text-black font-bold px-2 py-1 rounded-full text-xs">
+                          Seleccionada
+                        </span>
+                      )}
+                    </div>
                   </motion.div>
                 ))}
               </div>

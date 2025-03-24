@@ -3,7 +3,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Latex } from "@/components/ui/latex";
-import { QuizQuestion } from "@shared/schema";
+import { QuizQuestion, UserProgress } from "@shared/schema";
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -26,7 +26,7 @@ export default function QuestionCard({
   onVerifyAnswer
 }: QuestionCardProps) {
   // Query to get user progress
-  const { data: userProgress } = useQuery({
+  const { data: userProgress } = useQuery<UserProgress>({
     queryKey: ["/api/user/progress"],
   });
 
@@ -58,14 +58,21 @@ export default function QuestionCard({
               <motion.div
                 key={option.id}
                 className={`
-                  bg-cyberbg border ${selectedOption === option.id ? 'border-cyberaccent' : 'border-cyberprimary'} 
-                  p-3 rounded-md cursor-pointer hover:bg-cyberprimary hover:bg-opacity-20 transition
+                  bg-cyberbg border ${selectedOption === option.id ? 'border-2 border-cyberaccent shadow-[0_0_10px_rgba(167,139,250,0.5)]' : 'border-cyberprimary'} 
+                  p-3 rounded-md cursor-pointer hover:bg-cyberprimary hover:bg-opacity-20 transition relative
                 `}
                 onClick={() => onSelectOption(option.id)}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Latex formula={option.formula} />
+                <div className="flex justify-between items-center">
+                  <Latex formula={option.formula} />
+                  {selectedOption === option.id && (
+                    <span className="ml-2 bg-cyberaccent text-black font-bold px-2 py-1 rounded-full text-xs">
+                      Seleccionada
+                    </span>
+                  )}
+                </div>
               </motion.div>
             ))}
           </div>

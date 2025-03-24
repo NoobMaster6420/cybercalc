@@ -6,10 +6,11 @@ import Footer from "@/components/footer";
 import DifficultySelector from "@/components/quiz/difficulty-selector";
 import QuestionCard from "@/components/quiz/question-card";
 import QuestionResult from "@/components/quiz/question-result";
+import NoLives from "@/components/game/no-lives";
 import { Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/hooks/use-auth";
-import { QuizQuestion } from "@shared/schema";
+import { QuizQuestion, UserProgress } from "@shared/schema";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -35,7 +36,7 @@ export default function QuizPage() {
   });
 
   // Query to get user progress
-  const { data: userProgress, refetch: refetchUserProgress } = useQuery({
+  const { data: userProgress, refetch: refetchUserProgress } = useQuery<UserProgress>({
     queryKey: ["/api/user/progress"],
     enabled: !!user,
   });
@@ -251,6 +252,27 @@ export default function QuizPage() {
   }
 
   const currentQuestion = questions[currentQuestionIndex];
+
+  // Check if user has no lives
+  if (userProgress && userProgress.lives <= 0) {
+    return (
+      <div className="min-h-screen flex flex-col bg-cyberdark text-white">
+        <Navbar />
+        <main className="flex-grow py-12">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-3xl font-cyber font-bold text-center mb-8">
+              <span className="text-cyberaccent">Quiz</span> Interactivo
+            </h1>
+            
+            <div className="max-w-3xl mx-auto">
+              <NoLives onReset={() => refetchUserProgress()} />
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-cyberdark text-white">
