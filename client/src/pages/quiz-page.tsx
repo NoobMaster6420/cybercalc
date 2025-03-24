@@ -47,16 +47,8 @@ export default function QuizPage() {
       const res = await apiRequest("PATCH", "/api/user/lives", { lives });
       return await res.json();
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       refetchUserProgress();
-      
-      // Actualizar directamente la caché del usuario
-      if (user) {
-        queryClient.setQueryData(["/api/user"], {
-          ...user,
-          lives: data.lives
-        });
-      }
     },
   });
 
