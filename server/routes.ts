@@ -107,10 +107,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const challenge = await storage.createChallenge(challengeData);
 
-      // Update user points
+      // Update user points with challenge score
       const user = await storage.getUser(req.user.id);
       if (user) {
-        await storage.updateUserPoints(user.id, user.points + challengeData.score);
+        const finalScore = challengeData.score;
+        const newPoints = user.points + finalScore;
+        await storage.updateUserPoints(user.id, newPoints);
+        challenge.score = finalScore; // Ensure correct score is returned
       }
 
       res.status(201).json(challenge);
