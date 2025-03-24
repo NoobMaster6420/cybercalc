@@ -4,6 +4,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
 import { Heart, Star, Menu, X } from 'lucide-react';
+import { UserProgress } from '@shared/schema';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,7 +12,7 @@ export default function Navbar() {
   const { user, logoutMutation } = useAuth();
 
   // Query to get user progress
-  const { data: userProgress } = useQuery({
+  const { data: userProgress } = useQuery<UserProgress>({
     queryKey: ["/api/user/progress"],
     enabled: !!user,
   });
@@ -59,14 +60,14 @@ export default function Navbar() {
           
           {user && (
             <div className="hidden sm:ml-6 sm:flex sm:items-center">
-              <div id="user-stats" className="flex items-center mr-4 px-3 py-1 bg-cyberbg border border-cyberprimary rounded-lg">
-                <div className="flex items-center mr-3">
-                  <Heart className="h-4 w-4 text-red-500 mr-1" fill="#ef4444" />
-                  <span id="lives-count" className="font-medium">{userProgress?.lives || user.lives}</span>
+              <div id="user-stats" className="flex items-center mr-4 px-3 py-2 bg-cyberdark border border-cyberprimary rounded-lg shadow-neon-blue">
+                <div className="flex items-center mr-4 px-2 py-1 bg-cyberbg rounded-md">
+                  <Heart className="h-5 w-5 text-red-500 mr-1" fill="#ef4444" />
+                  <span id="lives-count" className="font-medium text-white">{user?.lives !== undefined ? user.lives : 3}</span>
                 </div>
-                <div className="flex items-center">
-                  <Star className="h-4 w-4 text-yellow-500 mr-1" fill="#eab308" />
-                  <span id="points-count" className="font-medium">{userProgress?.points || user.points}</span>
+                <div className="flex items-center px-2 py-1 bg-cyberbg rounded-md">
+                  <Star className="h-5 w-5 text-yellow-500 mr-1" fill="#eab308" />
+                  <span id="points-count" className="font-medium text-white">{user?.points !== undefined ? user.points : 0}</span>
                 </div>
               </div>
               <Button 
@@ -124,9 +125,16 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="ml-3">
-                <div className="text-base font-medium leading-none">{user.username}</div>
-                <div className="text-sm font-medium leading-none text-gray-400 mt-1">
-                  {userProgress?.points || user.points} puntos • {userProgress?.lives || user.lives} vidas
+                <div className="text-base font-medium leading-none text-white">{user.username}</div>
+                <div className="flex space-x-2 mt-2">
+                  <div className="flex items-center px-2 py-1 bg-cyberbg rounded-md">
+                    <Heart className="h-4 w-4 text-red-500 mr-1" fill="#ef4444" />
+                    <span className="text-xs font-medium text-white">{user?.lives !== undefined ? user.lives : 3}</span>
+                  </div>
+                  <div className="flex items-center px-2 py-1 bg-cyberbg rounded-md">
+                    <Star className="h-4 w-4 text-yellow-500 mr-1" fill="#eab308" />
+                    <span className="text-xs font-medium text-white">{user?.points !== undefined ? user.points : 0}</span>
+                  </div>
                 </div>
               </div>
             </div>
