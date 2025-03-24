@@ -13,31 +13,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get current user's progress
   app.get("/api/user/progress", async (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).json({ message: "Unauthorized" });
-    
+
     const userProgress = await storage.getUserProgress(req.user.id);
     if (!userProgress) {
       return res.status(404).json({ message: "User progress not found" });
     }
-    
+
     res.json(userProgress);
   });
 
   // Update user points
   app.patch("/api/user/points", async (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).json({ message: "Unauthorized" });
-    
+
     const schema = z.object({
       points: z.number().int().min(0)
     });
-    
+
     try {
       const { points } = schema.parse(req.body);
       const user = await storage.updateUserPoints(req.user.id, points);
-      
+
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-      
+
       res.json({ points: user.points });
     } catch (error) {
       res.status(400).json({ message: "Invalid request body" });
@@ -47,19 +47,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Update user lives
   app.patch("/api/user/lives", async (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).json({ message: "Unauthorized" });
-    
+
     const schema = z.object({
       lives: z.number().int().min(0).max(3)
     });
-    
+
     try {
       const { lives } = schema.parse(req.body);
       const user = await storage.updateUserLives(req.user.id, lives);
-      
+
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-      
+
       res.json({ lives: user.lives });
     } catch (error) {
       res.status(400).json({ message: "Invalid request body" });
@@ -69,22 +69,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Save quiz result
   app.post("/api/quizzes", async (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).json({ message: "Unauthorized" });
-    
+
     try {
       const quizData = insertQuizSchema.parse({
         ...req.body,
         userId: req.user.id,
         completedAt: new Date().toISOString()
       });
-      
+
       const quiz = await storage.createQuiz(quizData);
-      
+
       // Update user points
       const user = await storage.getUser(req.user.id);
       if (user) {
         await storage.updateUserPoints(user.id, user.points + quizData.score);
       }
-      
+
       res.status(201).json(quiz);
     } catch (error) {
       res.status(400).json({ message: "Invalid quiz data" });
@@ -94,22 +94,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Save challenge result
   app.post("/api/challenges", async (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).json({ message: "Unauthorized" });
-    
+
     try {
       const challengeData = insertChallengeSchema.parse({
         ...req.body,
         userId: req.user.id,
         completedAt: new Date().toISOString()
       });
-      
+
       const challenge = await storage.createChallenge(challengeData);
-      
+
       // Update user points
       const user = await storage.getUser(req.user.id);
       if (user) {
         await storage.updateUserPoints(user.id, user.points + challengeData.score);
       }
-      
+
       res.status(201).json(challenge);
     } catch (error) {
       res.status(400).json({ message: "Invalid challenge data" });
@@ -120,7 +120,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/leaderboard", async (req, res) => {
     const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
     const topUsers = await storage.getTopUsers(limit);
-    
+
     res.json(topUsers.map(user => ({
       id: user.id,
       username: user.username,
@@ -131,7 +131,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get quiz questions
   app.get("/api/questions", (req, res) => {
     const difficulty = req.query.difficulty as string || 'all';
-    
+
     // Static predefined questions
     const questions = [
       // Easy questions
@@ -222,7 +222,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         difficulty: "hard"
       }
     ];
-    
+
     if (difficulty === 'all') {
       res.json(questions);
     } else {
@@ -278,7 +278,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         points: 35
       }
     ];
-    
+
     res.json(challenges);
   });
 

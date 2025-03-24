@@ -39,7 +39,7 @@ export default function ChallengeCard({
             +{challenge.points} puntos
           </div>
         </div>
-        
+
         <CardContent className="p-0 mb-6">
           {showResult ? (
             <div>
@@ -72,7 +72,7 @@ export default function ChallengeCard({
                 <div className={`mb-2 bg-black bg-opacity-30 p-3 rounded-md border ${isCorrect ? 'border-green-500' : 'border-destructive'}`}>
                   <Latex formula={challenge.options.find(opt => opt.id === selectedOption)?.formula || ""} />
                 </div>
-                
+
                 {!isCorrect && (
                   <div className="mb-2">
                     <h4 className="text-lg font-medium mb-2 text-cyberaccent">Respuesta correcta:</h4>
@@ -88,7 +88,6 @@ export default function ChallengeCard({
                 <div className="bg-black bg-opacity-30 p-3 rounded-md">
                   <Latex formula={challenge.explanation} displayMode={true} />
                 </div>
-                
               </div>
             </div>
           ) : (
@@ -97,7 +96,7 @@ export default function ChallengeCard({
               <div className="mb-4 bg-black bg-opacity-30 p-4 rounded-md">
                 <Latex formula={challenge.formula} />
               </div>
-              
+
               <div className="space-y-3">
                 {challenge.options.map((option) => (
                   <motion.div
@@ -124,7 +123,7 @@ export default function ChallengeCard({
             </div>
           )}
         </CardContent>
-        
+
         <CardFooter className="p-0">
           {showResult ? (
             <Button 
