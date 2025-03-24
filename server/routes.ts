@@ -246,7 +246,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "f'(x) = (2x + 3) \\cdot \\sin(x^2 + 3x)" }
         ],
         correctOptionId: "a",
-        explanation: "",
+        explanation: "\\begin{align} \\frac{d}{dx}[\\sin(x^2 + 3x)] &= \\frac{d}{du}[\\sin(u)] \\cdot \\frac{du}{dx} \\quad \\text{donde } u = x^2 + 3x \\\\ &= \\cos(x^2 + 3x) \\cdot \\frac{d}{dx}[x^2 + 3x] \\\\ &= \\cos(x^2 + 3x) \\cdot (2x + 3) \\\\ &= f'(x) \\end{align}",
         points: 25
       },
       {
