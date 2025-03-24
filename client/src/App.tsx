@@ -9,7 +9,6 @@ import TheoryPage from "@/pages/theory-page";
 import QuizPage from "@/pages/quiz-page";
 import ChallengesPage from "@/pages/challenges-page";
 import LeaderboardPage from "@/pages/leaderboard-page";
-import GamesPage from "@/pages/games-page";
 import { ProtectedRoute } from "./lib/protected-route";
 import { AuthProvider } from "@/hooks/use-auth";
 
@@ -22,7 +21,6 @@ function Router() {
       <ProtectedRoute path="/quiz" component={QuizPage} />
       <ProtectedRoute path="/retos" component={ChallengesPage} />
       <ProtectedRoute path="/ranking" component={LeaderboardPage} />
-      <ProtectedRoute path="/juegos" component={GamesPage} />
       <Route component={NotFound} />
     </Switch>
   );

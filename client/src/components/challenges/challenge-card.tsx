@@ -76,8 +76,8 @@ export default function ChallengeCard({
 
               <div className="bg-cyberdark p-4 rounded-lg">
                 <h4 className="text-lg font-medium mb-2 text-cyberaccent">Explicación:</h4>
-                <div className="bg-black bg-opacity-30 p-3 rounded-md text-white">
-                  <Latex formula={challenge.explanation} displayMode={true} />
+                <div className="bg-black bg-opacity-30 p-3 rounded-md">
+                  <Latex formula={challenge.explanation} />
                 </div>
               </div>
             </div>

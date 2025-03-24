@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
 import { Heart, Star, Menu, X } from 'lucide-react';
 import { UserProgress } from '@shared/schema';
+import { queryClient } from '@/lib/queryClient';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,6 +17,17 @@ export default function Navbar() {
     queryKey: ["/api/user/progress"],
     enabled: !!user,
   });
+  
+  // Effect para actualizar la caché del usuario cuando cambia el progreso
+  useEffect(() => {
+    if (user && userProgress) {
+      queryClient.setQueryData(["/api/user"], {
+        ...user,
+        points: userProgress.points,
+        lives: userProgress.lives
+      });
+    }
+  }, [userProgress, user]);
 
   const handleLogout = () => {
     logoutMutation.mutate();
@@ -54,11 +66,6 @@ export default function Navbar() {
               </Link>
               <Link href="/ranking">
                 <a className="border-transparent hover:border-cyberaccent text-white hover:text-cyberaccent px-3 py-2 font-medium hover:bg-opacity-10 hover:bg-cyberaccent rounded-md transition duration-150">Ranking</a>
-              </Link>
-              <Link href="/juegos">
-                <a className="border-transparent hover:border-cyberaccent text-white hover:text-cyberaccent px-3 py-2 font-medium hover:bg-opacity-10 hover:bg-cyberaccent rounded-md transition duration-150 flex items-center">
-                  <span className="mr-1">Video Juegos</span>
-                </a>
               </Link>
             </div>
           </div>
@@ -118,9 +125,6 @@ export default function Navbar() {
           </Link>
           <Link href="/ranking">
             <a onClick={closeMenu} className="block px-3 py-2 rounded-md text-white font-medium hover:bg-cyberprimary hover:bg-opacity-20">Ranking</a>
-          </Link>
-          <Link href="/juegos">
-            <a onClick={closeMenu} className="block px-3 py-2 rounded-md text-white font-medium hover:bg-cyberprimary hover:bg-opacity-20">Video Juegos</a>
           </Link>
         </div>
         
