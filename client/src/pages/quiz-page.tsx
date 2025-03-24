@@ -58,22 +58,12 @@ export default function QuizPage() {
       const res = await apiRequest("POST", "/api/quizzes", quizData);
       return await res.json();
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast({
         title: "¡Quiz completado!",
         description: `Has ganado ${score} puntos.`,
       });
-      
-      // Actualizar la información de progreso
       refetchUserProgress();
-      
-      // Actualizar directamente la caché del usuario para reflejar los puntos ganados
-      if (user) {
-        queryClient.setQueryData(["/api/user"], {
-          ...user,
-          points: (user.points || 0) + score
-        });
-      }
     },
   });
 
