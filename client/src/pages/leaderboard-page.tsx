@@ -17,6 +17,8 @@ export default function LeaderboardPage() {
   
   const { data: leaderboardUsers, isLoading: isLoadingLeaderboard } = useQuery<LeaderboardUser[]>({
     queryKey: ["/api/leaderboard"],
+    refetchInterval: 2000, // Refetch every 2 seconds
+    refetchOnWindowFocus: true,
   });
 
   // Helper function to get user level based on points
