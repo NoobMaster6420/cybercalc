@@ -40,8 +40,16 @@ export default function ChallengesPage() {
       const res = await apiRequest("PATCH", "/api/user/lives", { lives });
       return await res.json();
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       refetchUserProgress();
+      
+      // Actualizar directamente la caché del usuario
+      if (user) {
+        queryClient.setQueryData(["/api/user"], {
+          ...user,
+          lives: data.lives
+        });
+      }
     },
   });
 
@@ -51,12 +59,20 @@ export default function ChallengesPage() {
       const res = await apiRequest("POST", "/api/challenges", challengeData);
       return await res.json();
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast({
         title: "¡Reto completado!",
         description: `Has ganado ${challengeScore} puntos.`,
       });
       refetchUserProgress();
+      
+      // Actualizar directamente la caché del usuario para reflejar los puntos ganados
+      if (user) {
+        queryClient.setQueryData(["/api/user"], {
+          ...user,
+          points: (user.points || 0) + challengeScore
+        });
+      }
     },
   });
 

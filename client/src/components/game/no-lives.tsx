@@ -6,6 +6,7 @@ import { Heart, RefreshCw, Trophy } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/use-auth";
 
 interface NoLivesProps {
   onReset: () => void;
@@ -13,6 +14,7 @@ interface NoLivesProps {
 
 export default function NoLives({ onReset }: NoLivesProps) {
   const { toast } = useToast();
+  const { user } = useAuth();
   const [isResetting, setIsResetting] = useState(false);
 
   // Mutation to reset lives and points
@@ -24,11 +26,23 @@ export default function NoLives({ onReset }: NoLivesProps) {
       return await apiRequest("PATCH", "/api/user/points", { points: 0 });
     },
     onSuccess: () => {
+      // Invalidar la consulta de progreso
       queryClient.invalidateQueries({ queryKey: ["/api/user/progress"] });
+      
+      // Actualizar directamente el usuario en caché
+      if (user) {
+        queryClient.setQueryData(["/api/user"], {
+          ...user,
+          points: 0,
+          lives: 3
+        });
+      }
+      
       toast({
         title: "¡Vidas restablecidas!",
         description: "Tus vidas han sido restablecidas a 3 y tus puntos a 0.",
       });
+      
       setIsResetting(false);
       onReset();
     },
