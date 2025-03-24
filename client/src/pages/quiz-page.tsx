@@ -56,12 +56,13 @@ export default function QuizPage() {
   const saveQuizMutation = useMutation({
     mutationFn: async (quizData: { difficulty: string, score: number }) => {
       const res = await apiRequest("POST", "/api/quizzes", quizData);
-      return await res.json();
+      const result = await res.json();
+      return result;
     },
     onSuccess: (data) => {
       toast({
         title: "¡Quiz completado!",
-        description: `Has ganado ${score} puntos.`,
+        description: `Has ganado ${data.score} puntos.`,
       });
       
       // Actualizar la información de progreso
@@ -71,7 +72,7 @@ export default function QuizPage() {
       if (user) {
         queryClient.setQueryData(["/api/user"], {
           ...user,
-          points: (user.points || 0) + score
+          points: (user.points || 0) + data.score
         });
       }
     },
