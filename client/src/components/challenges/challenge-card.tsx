@@ -76,8 +76,27 @@ export default function ChallengeCard({
 
               <div className="bg-cyberdark p-4 rounded-lg">
                 <h4 className="text-lg font-medium mb-2 text-cyberaccent">Explicación:</h4>
-                <div className="bg-black bg-opacity-30 p-3 rounded-md">
-                  <Latex formula={challenge.explanation} />
+                <div className="bg-black bg-opacity-30 p-4 rounded-md text-white space-y-4">
+                  <p className="text-gray-200 mb-2">
+                    A continuación se desarrolla la derivada paso a paso con la explicación detallada:
+                  </p>
+                  <div className="mb-3">
+                    <Latex formula={challenge.explanation} displayMode={true} />
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-gray-200">
+                      <span className="text-cyberaccent font-bold">Método aplicado:</span> Utilizamos las reglas de derivación correspondientes para esta expresión.
+                    </p>
+                    <p className="text-gray-200">
+                      <span className="text-cyberaccent font-bold">Desarrollo:</span> Observa que al aplicar la regla del producto/cociente/cadena (según el ejercicio), obtenemos un resultado que requiere varios pasos algebraicos.
+                    </p>
+                    <p className="text-gray-200">
+                      <span className="text-cyberaccent font-bold">Simplificación:</span> La expresión final puede simplificarse para obtener una forma más elegante, como se muestra en los pasos LaTex.
+                    </p>
+                    <p className="text-gray-200">
+                      <span className="text-cyberaccent font-bold">Concepto clave:</span> Este tipo de ejercicios refuerza la aplicación de las reglas fundamentales del cálculo diferencial en expresiones complejas.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

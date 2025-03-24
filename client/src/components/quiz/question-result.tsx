@@ -68,8 +68,27 @@ export default function QuestionResult({
 
           <div className="bg-cyberbg p-4 rounded-lg">
             <h4 className="text-lg font-medium mb-2 text-cyberaccent">Explicación:</h4>
-            <div className="bg-black bg-opacity-30 p-3 rounded-md">
-              <Latex formula={question.explanation} displayMode={true} />
+            <div className="bg-black bg-opacity-30 p-4 rounded-md text-white space-y-4">
+              <p className="text-gray-200 mb-2">
+                Para resolver esta derivada, seguiremos los siguientes pasos:
+              </p>
+              <div className="mb-3">
+                <Latex formula={question.explanation} displayMode={true} />
+              </div>
+              <div className="space-y-2">
+                <p className="text-gray-200">
+                  <span className="text-cyberaccent font-bold">Paso 1:</span> Identificamos la regla de derivación que debemos aplicar.
+                </p>
+                <p className="text-gray-200">
+                  <span className="text-cyberaccent font-bold">Paso 2:</span> Aplicamos las fórmulas correspondientes, realizando las operaciones algebraicas necesarias.
+                </p>
+                <p className="text-gray-200">
+                  <span className="text-cyberaccent font-bold">Paso 3:</span> Simplificamos la expresión para obtener la forma final.
+                </p>
+                <p className="text-gray-200">
+                  <span className="text-cyberaccent font-bold">Recuerda:</span> Las reglas de derivación son fundamentales para resolver estos ejercicios de manera eficiente.
+                </p>
+              </div>
             </div>
           </div>
         </CardContent>
