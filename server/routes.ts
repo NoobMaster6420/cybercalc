@@ -146,7 +146,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "f'(x) = 3 \\cdot 2x - 2 \\cdot 1" }
         ],
         correctOptionId: "a",
-        explanation: "Aplicamos la regla de la potencia a cada término: $3x^2$ se deriva como $3 \\cdot 2 \\cdot x^{2-1} = 6x$, $-2x$ se deriva como $-2 \\cdot 1 \\cdot x^{1-1} = -2$ y la constante $5$ se deriva como $0$. Por lo tanto, $f'(x) = 6x - 2 + 0 = 6x - 2$.",
+        explanation: "\\begin{align} \\frac{d}{dx}[3x^2 - 2x + 5] &= \\frac{d}{dx}[3x^2] + \\frac{d}{dx}[-2x] + \\frac{d}{dx}[5] \\\\ &= 3 \\cdot \\frac{d}{dx}[x^2] - 2 \\cdot \\frac{d}{dx}[x] + \\frac{d}{dx}[5] \\\\ &= 3 \\cdot 2x^{2-1} - 2 \\cdot 1 + 0 \\\\ &= 6x - 2 \\\\ &= f'(x) \\end{align}",
         difficulty: "easy"
       },
       {
@@ -160,7 +160,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "g'(x) = 15x^3 + 2" }
         ],
         correctOptionId: "a",
-        explanation: "Aplicamos la regla de la potencia: $5x^3$ se deriva como $5 \\cdot 3 \\cdot x^{3-1} = 15x^2$ y $2x$ se deriva como $2 \\cdot 1 \\cdot x^{1-1} = 2$. Por lo tanto, $g'(x) = 15x^2 + 2$.",
+        explanation: "\\begin{align} \\frac{d}{dx}[5x^3 + 2x] &= \\frac{d}{dx}[5x^3] + \\frac{d}{dx}[2x] \\\\ &= 5 \\cdot \\frac{d}{dx}[x^3] + 2 \\cdot \\frac{d}{dx}[x] \\\\ &= 5 \\cdot 3x^{3-1} + 2 \\cdot 1 \\\\ &= 15x^2 + 2 \\\\ &= g'(x) \\end{align}",
         difficulty: "easy"
       },
       // Medium questions
@@ -175,7 +175,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "h'(x) = 2x \\cdot \\cos(x)" }
         ],
         correctOptionId: "c",
-        explanation: "Usando la regla del producto $f(x) \\cdot g(x)' = f'(x) \\cdot g(x) + f(x) \\cdot g'(x)$: La derivada de $x^2$ es $2x$ y la derivada de $\\sin(x)$ es $\\cos(x)$. Por lo tanto, $h'(x) = 2x \\cdot \\sin(x) + x^2 \\cdot \\cos(x)$.",
+        explanation: "\\begin{align} \\frac{d}{dx}[x^2 \\cdot \\sin(x)] &= \\frac{d}{dx}[x^2] \\cdot \\sin(x) + x^2 \\cdot \\frac{d}{dx}[\\sin(x)] \\\\ &= 2x \\cdot \\sin(x) + x^2 \\cdot \\cos(x) \\\\ &= h'(x) \\end{align} Aquí aplicamos la regla del producto: $(f \\cdot g)' = f' \\cdot g + f \\cdot g'$ donde $f(x) = x^2$ y $g(x) = \\sin(x)$.",
         difficulty: "medium"
       },
       {
@@ -189,7 +189,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "j'(x) = x \\cdot \\cos(x^2)" }
         ],
         correctOptionId: "b",
-        explanation: "Usando la regla de la cadena $(f(g(x)))' = f'(g(x)) \\cdot g'(x)$: La derivada de $\\sin(u)$ es $\\cos(u)$ y la derivada de $x^2$ es $2x$. Por lo tanto, $j'(x) = \\cos(x^2) \\cdot 2x = 2x \\cdot \\cos(x^2)$.",
+        explanation: "\\begin{align} \\frac{d}{dx}[\\sin(x^2)] &= \\frac{d}{du}[\\sin(u)] \\cdot \\frac{du}{dx} \\text{ donde } u = x^2 \\\\ &= \\cos(u) \\cdot \\frac{d}{dx}[x^2] \\\\ &= \\cos(x^2) \\cdot 2x \\\\ &= 2x \\cdot \\cos(x^2) \\\\ &= j'(x) \\end{align} Aquí aplicamos la regla de la cadena: $(f(g(x)))' = f'(g(x)) \\cdot g'(x)$ donde $f(x) = \\sin(x)$ y $g(x) = x^2$.",
         difficulty: "medium"
       },
       // Hard questions
@@ -204,7 +204,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "k'(x) = \\frac{2x - x^2 \\cdot \\sin(x)}{\\cos(x)}" }
         ],
         correctOptionId: "a",
-        explanation: "Usando la regla del cociente $(\\frac{f(x)}{g(x)})' = \\frac{f'(x) \\cdot g(x) - f(x) \\cdot g'(x)}{g(x)^2}$: La derivada de $x^2$ es $2x$ y la derivada de $\\cos(x)$ es $-\\sin(x)$. Por lo tanto, $k'(x) = \\frac{2x \\cdot \\cos(x) - x^2 \\cdot (-\\sin(x))}{\\cos^2(x)} = \\frac{2x \\cdot \\cos(x) + x^2 \\cdot \\sin(x)}{\\cos^2(x)}$.",
+        explanation: "\\begin{align} \\frac{d}{dx}\\left[\\frac{x^2}{\\cos(x)}\\right] &= \\frac{\\frac{d}{dx}[x^2] \\cdot \\cos(x) - x^2 \\cdot \\frac{d}{dx}[\\cos(x)]}{\\cos^2(x)} \\\\ &= \\frac{2x \\cdot \\cos(x) - x^2 \\cdot (-\\sin(x))}{\\cos^2(x)} \\\\ &= \\frac{2x \\cdot \\cos(x) + x^2 \\cdot \\sin(x)}{\\cos^2(x)} \\\\ &= k'(x) \\end{align} Aquí aplicamos la regla del cociente: $\\left(\\frac{f(x)}{g(x)}\\right)' = \\frac{f'(x) \\cdot g(x) - f(x) \\cdot g'(x)}{g(x)^2}$ donde $f(x) = x^2$ y $g(x) = \\cos(x)$.",
         difficulty: "hard"
       },
       {
@@ -218,7 +218,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "m'(x) = e^{\\sin(x^2)} \\cdot 2x" }
         ],
         correctOptionId: "a",
-        explanation: "Debemos aplicar la regla de la cadena dos veces. La derivada de $e^u$ es $e^u \\cdot u'$. Aquí $u = \\sin(x^2)$, y la derivada de $\\sin(v)$ es $\\cos(v) \\cdot v'$. Finalmente, $v = x^2$ y $v' = 2x$. Por lo tanto, $m'(x) = e^{\\sin(x^2)} \\cdot \\cos(x^2) \\cdot 2x$.",
+        explanation: "\\begin{align} \\frac{d}{dx}[e^{\\sin(x^2)}] &= e^{\\sin(x^2)} \\cdot \\frac{d}{dx}[\\sin(x^2)] \\text{ (derivada de } e^u \\text{ es } e^u \\cdot u') \\\\ &= e^{\\sin(x^2)} \\cdot \\cos(x^2) \\cdot \\frac{d}{dx}[x^2] \\text{ (regla de la cadena)} \\\\ &= e^{\\sin(x^2)} \\cdot \\cos(x^2) \\cdot 2x \\\\ &= m'(x) \\end{align} Aplicamos la regla de la cadena dos veces. Primero para la función $e^u$ donde $u = \\sin(x^2)$, y luego para $\\sin(v)$ donde $v = x^2$.",
         difficulty: "hard"
       }
     ];
@@ -246,7 +246,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "f'(x) = (2x + 3) \\cdot \\sin(x^2 + 3x)" }
         ],
         correctOptionId: "a",
-        explanation: "Aplicamos la regla de la cadena. La derivada de $\\sin(u)$ es $\\cos(u) \\cdot u'$, donde $u = x^2 + 3x$. La derivada de $u$ es $u' = 2x + 3$. Por lo tanto, $f'(x) = \\cos(x^2 + 3x) \\cdot (2x + 3)$.",
+        explanation: "\\begin{align} \\frac{d}{dx}[\\sin(x^2 + 3x)] &= \\frac{d}{du}[\\sin(u)] \\cdot \\frac{du}{dx} \\text{ donde } u = x^2 + 3x \\\\ &= \\cos(u) \\cdot \\frac{d}{dx}[x^2 + 3x] \\\\ &= \\cos(x^2 + 3x) \\cdot (2x + 3) \\\\ &= f'(x) \\end{align} Aplicamos la regla de la cadena $(f(g(x)))' = f'(g(x)) \\cdot g'(x)$. En este caso, $f(x) = \\sin(x)$ y $g(x) = x^2 + 3x$.",
         points: 25
       },
       {
@@ -260,7 +260,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "g'(x) = -\\sec(x) \\cdot \\tan(x)" }
         ],
         correctOptionId: "a",
-        explanation: "Aplicamos la regla de la cadena. La derivada de $\\ln(u)$ es $\\frac{1}{u} \\cdot u'$, donde $u = \\cos(x)$. La derivada de $u$ es $u' = -\\sin(x)$. Por lo tanto, $g'(x) = \\frac{1}{\\cos(x)} \\cdot (-\\sin(x)) = -\\frac{\\sin(x)}{\\cos(x)} = -\\tan(x)$.",
+        explanation: "\\begin{align} \\frac{d}{dx}[\\ln(\\cos(x))] &= \\frac{d}{du}[\\ln(u)] \\cdot \\frac{du}{dx} \\text{ donde } u = \\cos(x) \\\\ &= \\frac{1}{u} \\cdot \\frac{d}{dx}[\\cos(x)] \\\\ &= \\frac{1}{\\cos(x)} \\cdot (-\\sin(x)) \\\\ &= -\\frac{\\sin(x)}{\\cos(x)} \\\\ &= -\\tan(x) \\\\ &= g'(x) \\end{align} Aplicamos la regla de la cadena para funciones compuestas, recordando que $\\frac{d}{dx}[\\ln(u)] = \\frac{1}{u} \\cdot u'$ y $\\frac{d}{dx}[\\cos(x)] = -\\sin(x)$.",
         points: 30
       },
       {

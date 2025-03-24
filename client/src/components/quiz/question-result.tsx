@@ -51,16 +51,25 @@ export default function QuestionResult({
           </div>
 
           <div className="bg-cyberbg p-4 rounded-lg mb-4">
-            <h4 className="text-lg font-medium mb-2 text-cyberaccent">Respuesta correcta:</h4>
-            <div className="mb-2 bg-black bg-opacity-30 p-3 rounded-md border border-green-500">
-              <Latex formula={question.options.find(opt => opt.id === question.correctOptionId)?.formula || ""} />
+            <h4 className="text-lg font-medium mb-2 text-cyberaccent">Tu respuesta:</h4>
+            <div className={`mb-2 bg-black bg-opacity-30 p-3 rounded-md border ${isCorrect ? 'border-green-500' : 'border-red-500'}`}>
+              <Latex formula={question.options.find(opt => opt.id === selectedOption)?.formula || ""} />
             </div>
+            
+            {!isCorrect && (
+              <div className="mb-2">
+                <h4 className="text-lg font-medium mb-2 text-cyberaccent">Respuesta correcta:</h4>
+                <div className="mb-2 bg-black bg-opacity-30 p-3 rounded-md border border-green-500">
+                  <Latex formula={question.options.find(opt => opt.id === question.correctOptionId)?.formula || ""} />
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="bg-cyberbg p-4 rounded-lg">
             <h4 className="text-lg font-medium mb-2 text-cyberaccent">Explicación:</h4>
             <div className="bg-black bg-opacity-30 p-3 rounded-md">
-              <Latex formula={question.explanation} />
+              <Latex formula={question.explanation} displayMode={true} />
             </div>
           </div>
         </CardContent>
