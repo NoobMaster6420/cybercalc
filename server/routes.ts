@@ -77,15 +77,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         completedAt: new Date().toISOString()
       });
 
+      // Mantener el puntaje original sin modificaciones
       const quiz = await storage.createQuiz(quizData);
 
-      // Update user points with complete score
+      // Actualizar puntos del usuario
       const user = await storage.getUser(req.user.id);
       if (user) {
-        const fullScore = quizData.score; // Use the original score from request
-        const newPoints = user.points + fullScore;
+        const newPoints = user.points + finalScore;
         await storage.updateUserPoints(user.id, newPoints);
-        quiz.score = fullScore; // Update quiz score to reflect full points
       }
 
       res.status(201).json(quiz);
@@ -107,13 +106,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const challenge = await storage.createChallenge(challengeData);
 
-      // Update user points with challenge score
+      // Update user points
       const user = await storage.getUser(req.user.id);
       if (user) {
-        const finalScore = challengeData.score;
-        const newPoints = user.points + finalScore;
-        await storage.updateUserPoints(user.id, newPoints);
-        challenge.score = finalScore; // Ensure correct score is returned
+        await storage.updateUserPoints(user.id, user.points + challengeData.score);
       }
 
       res.status(201).json(challenge);
@@ -124,7 +120,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Get leaderboard
   app.get("/api/leaderboard", async (req, res) => {
-    const limit = req.query.limit ? parseInt(req.query.limit as string) : ;
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
     const topUsers = await storage.getTopUsers(limit);
 
     res.json(topUsers.map(user => ({
