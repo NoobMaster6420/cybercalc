@@ -121,7 +121,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Get leaderboard
   app.get("/api/leaderboard", async (req, res) => {
-    const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : ;
     const topUsers = await storage.getTopUsers(limit);
 
     res.json(topUsers.map(user => ({
