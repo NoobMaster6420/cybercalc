@@ -175,7 +175,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "h'(x) = 2x \\cdot \\cos(x)" }
         ],
         correctOptionId: "c",
-        explanation: "\\begin{align} \\frac{d}{dx}[x^2 \\cdot \\sin(x)] &= \\frac{d}{dx}[x^2] \\cdot \\sin(x) + x^2 \\cdot \\frac{d}{dx}[\\sin(x)] \\\\ &= 2x \\cdot \\sin(x) + x^2 \\cdot \\cos(x) \\\\ &= h'(x) \\end{align} Aquí aplicamos la regla del producto: $(f \\cdot g)' = f' \\cdot g + f \\cdot g'$ donde $f(x) = x^2$ y $g(x) = \\sin(x)$.",
+        explanation: "\\begin{align} \\frac{d}{dx}[x^2 \\cdot \\sin(x)] &= \\frac{d}{dx}[x^2] \\cdot \\sin(x) + x^2 \\cdot \\frac{d}{dx}[\\sin(x)] \\\\ &= 2x \\cdot \\sin(x) + x^2 \\cdot \\cos(x) \\\\ &= h'(x) \\end{align}",
         difficulty: "medium"
       },
       {
@@ -189,7 +189,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "j'(x) = x \\cdot \\cos(x^2)" }
         ],
         correctOptionId: "b",
-        explanation: "\\begin{align} \\frac{d}{dx}[\\sin(x^2)] &= \\frac{d}{du}[\\sin(u)] \\cdot \\frac{du}{dx} \\text{ donde } u = x^2 \\\\ &= \\cos(u) \\cdot \\frac{d}{dx}[x^2] \\\\ &= \\cos(x^2) \\cdot 2x \\\\ &= 2x \\cdot \\cos(x^2) \\\\ &= j'(x) \\end{align} Aquí aplicamos la regla de la cadena: $(f(g(x)))' = f'(g(x)) \\cdot g'(x)$ donde $f(x) = \\sin(x)$ y $g(x) = x^2$.",
+        explanation: "\\begin{align} \\frac{d}{dx}[\\sin(x^2)] &= \\frac{d}{du}[\\sin(u)] \\cdot \\frac{du}{dx} \\quad \\text{donde } u = x^2 \\\\ &= \\cos(x^2) \\cdot \\frac{d}{dx}[x^2] \\\\ &= \\cos(x^2) \\cdot 2x \\\\ &= 2x \\cdot \\cos(x^2) \\\\ &= j'(x) \\end{align}",
         difficulty: "medium"
       },
       // Hard questions
@@ -204,7 +204,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "k'(x) = \\frac{2x - x^2 \\cdot \\sin(x)}{\\cos(x)}" }
         ],
         correctOptionId: "a",
-        explanation: "\\begin{align} \\frac{d}{dx}\\left[\\frac{x^2}{\\cos(x)}\\right] &= \\frac{\\frac{d}{dx}[x^2] \\cdot \\cos(x) - x^2 \\cdot \\frac{d}{dx}[\\cos(x)]}{\\cos^2(x)} \\\\ &= \\frac{2x \\cdot \\cos(x) - x^2 \\cdot (-\\sin(x))}{\\cos^2(x)} \\\\ &= \\frac{2x \\cdot \\cos(x) + x^2 \\cdot \\sin(x)}{\\cos^2(x)} \\\\ &= k'(x) \\end{align} Aquí aplicamos la regla del cociente: $\\left(\\frac{f(x)}{g(x)}\\right)' = \\frac{f'(x) \\cdot g(x) - f(x) \\cdot g'(x)}{g(x)^2}$ donde $f(x) = x^2$ y $g(x) = \\cos(x)$.",
+        explanation: "\\begin{align} \\frac{d}{dx}\\left[\\frac{x^2}{\\cos(x)}\\right] &= \\frac{\\frac{d}{dx}[x^2] \\cdot \\cos(x) - x^2 \\cdot \\frac{d}{dx}[\\cos(x)]}{\\cos^2(x)} \\\\ &= \\frac{2x \\cdot \\cos(x) - x^2 \\cdot (-\\sin(x))}{\\cos^2(x)} \\\\ &= \\frac{2x \\cdot \\cos(x) + x^2 \\cdot \\sin(x)}{\\cos^2(x)} \\\\ &= k'(x) \\end{align}",
         difficulty: "hard"
       },
       {
@@ -218,7 +218,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "m'(x) = e^{\\sin(x^2)} \\cdot 2x" }
         ],
         correctOptionId: "a",
-        explanation: "\\begin{align} \\frac{d}{dx}[e^{\\sin(x^2)}] &= e^{\\sin(x^2)} \\cdot \\frac{d}{dx}[\\sin(x^2)] \\text{ (derivada de } e^u \\text{ es } e^u \\cdot u') \\\\ &= e^{\\sin(x^2)} \\cdot \\cos(x^2) \\cdot \\frac{d}{dx}[x^2] \\text{ (regla de la cadena)} \\\\ &= e^{\\sin(x^2)} \\cdot \\cos(x^2) \\cdot 2x \\\\ &= m'(x) \\end{align} Aplicamos la regla de la cadena dos veces. Primero para la función $e^u$ donde $u = \\sin(x^2)$, y luego para $\\sin(v)$ donde $v = x^2$.",
+        explanation: "\\begin{align} \\frac{d}{dx}[e^{\\sin(x^2)}] &= e^{\\sin(x^2)} \\cdot \\frac{d}{dx}[\\sin(x^2)] \\\\ &= e^{\\sin(x^2)} \\cdot \\cos(x^2) \\cdot \\frac{d}{dx}[x^2] \\\\ &= e^{\\sin(x^2)} \\cdot \\cos(x^2) \\cdot 2x \\\\ &= m'(x) \\end{align}",
         difficulty: "hard"
       }
     ];
