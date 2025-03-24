@@ -88,6 +88,26 @@ export default function ChallengeCard({
                 <div className="bg-black bg-opacity-30 p-3 rounded-md">
                   <Latex formula={challenge.explanation} displayMode={true} />
                 </div>
+                {challenge.id === 1 && (
+                  <p className="text-gray-300 mt-3">
+                    Aplicamos la regla de la cadena para derivar la función compuesta. Donde $f(x) = \sin(x)$ y $g(x) = x^2 + 3x$, 
+                    calculamos $(f \circ g)'(x) = f'(g(x)) \cdot g'(x)$.
+                  </p>
+                )}
+                {challenge.id === 2 && (
+                  <p className="text-gray-300 mt-3">
+                    Aplicamos la regla de la cadena para funciones compuestas, recordando que la derivada del 
+                    logaritmo natural es $\frac{d}{dx}[\ln(u)] = \frac{1}{u} \cdot u'$ y la derivada 
+                    del coseno es $\frac{d}{dx}[\cos(x)] = -\sin(x)$.
+                  </p>
+                )}
+                {challenge.id === 3 && (
+                  <p className="text-gray-300 mt-3">
+                    Aquí aplicamos la regla del producto: $(f \cdot g)' = f' \cdot g + f \cdot g'$ donde
+                    $f(x) = x^3$ con $f'(x) = 3x^2$ y $g(x) = e^x$ con $g'(x) = e^x$. 
+                    Observa que podemos factorizar $e^x$ del resultado final.
+                  </p>
+                )}
               </div>
             </div>
           ) : (

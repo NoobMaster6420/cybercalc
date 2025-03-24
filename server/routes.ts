@@ -246,7 +246,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "f'(x) = (2x + 3) \\cdot \\sin(x^2 + 3x)" }
         ],
         correctOptionId: "a",
-        explanation: "\\begin{align} \\frac{d}{dx}[\\sin(x^2 + 3x)] &= \\frac{d}{du}[\\sin(u)] \\cdot \\frac{du}{dx} \\text{ donde } u = x^2 + 3x \\\\ &= \\cos(u) \\cdot \\frac{d}{dx}[x^2 + 3x] \\\\ &= \\cos(x^2 + 3x) \\cdot (2x + 3) \\\\ &= f'(x) \\end{align} Aplicamos la regla de la cadena $(f(g(x)))' = f'(g(x)) \\cdot g'(x)$. En este caso, $f(x) = \\sin(x)$ y $g(x) = x^2 + 3x$.",
+        explanation: "\\begin{align} \\frac{d}{dx}[\\sin(x^2 + 3x)] &= \\frac{d}{du}[\\sin(u)] \\cdot \\frac{du}{dx} \\quad \\text{donde } u = x^2 + 3x \\\\ &= \\cos(u) \\cdot \\frac{d}{dx}[x^2 + 3x] \\\\ &= \\cos(x^2 + 3x) \\cdot (2x + 3) \\\\ &= f'(x) \\end{align}",
         points: 25
       },
       {
@@ -260,7 +260,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "g'(x) = -\\sec(x) \\cdot \\tan(x)" }
         ],
         correctOptionId: "a",
-        explanation: "\\begin{align} \\frac{d}{dx}[\\ln(\\cos(x))] &= \\frac{d}{du}[\\ln(u)] \\cdot \\frac{du}{dx} \\text{ donde } u = \\cos(x) \\\\ &= \\frac{1}{u} \\cdot \\frac{d}{dx}[\\cos(x)] \\\\ &= \\frac{1}{\\cos(x)} \\cdot (-\\sin(x)) \\\\ &= -\\frac{\\sin(x)}{\\cos(x)} \\\\ &= -\\tan(x) \\\\ &= g'(x) \\end{align} Aplicamos la regla de la cadena para funciones compuestas, recordando que $\\frac{d}{dx}[\\ln(u)] = \\frac{1}{u} \\cdot u'$ y $\\frac{d}{dx}[\\cos(x)] = -\\sin(x)$.",
+        explanation: "\\begin{align} \\frac{d}{dx}[\\ln(\\cos(x))] &= \\frac{d}{du}[\\ln(u)] \\cdot \\frac{du}{dx} \\quad \\text{donde } u = \\cos(x) \\\\ &= \\frac{1}{u} \\cdot \\frac{d}{dx}[\\cos(x)] \\\\ &= \\frac{1}{\\cos(x)} \\cdot (-\\sin(x)) \\\\ &= -\\frac{\\sin(x)}{\\cos(x)} \\\\ &= -\\tan(x) \\\\ &= g'(x) \\end{align}",
         points: 30
       },
       {
@@ -274,7 +274,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "h'(x) = 3x^2 \\cdot e^x \\cdot x" }
         ],
         correctOptionId: "c",
-        explanation: "\\begin{align} \\frac{d}{dx}[x^3 \\cdot e^x] &= \\frac{d}{dx}[x^3] \\cdot e^x + x^3 \\cdot \\frac{d}{dx}[e^x] \\\\ &= 3x^2 \\cdot e^x + x^3 \\cdot e^x \\\\ &= e^x \\cdot (3x^2 + x^3) \\\\ &= h'(x) \\end{align} Aquí aplicamos la regla del producto: $(f \\cdot g)' = f' \\cdot g + f \\cdot g'$ donde $f(x) = x^3$ con $f'(x) = 3x^2$ y $g(x) = e^x$ con $g'(x) = e^x$. Observa que podemos factorizar $e^x$ del resultado final.",
+        explanation: "\\begin{align} \\frac{d}{dx}[x^3 \\cdot e^x] &= \\frac{d}{dx}[x^3] \\cdot e^x + x^3 \\cdot \\frac{d}{dx}[e^x] \\\\ &= 3x^2 \\cdot e^x + x^3 \\cdot e^x \\\\ &= e^x \\cdot (3x^2 + x^3) \\\\ &= h'(x) \\end{align}",
         points: 35
       }
     ];
