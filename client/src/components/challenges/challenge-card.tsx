@@ -52,7 +52,7 @@ export default function ChallengeCard({
                   </div>
                 ) : (
                   <div className="flex flex-col items-center">
-                    <XCircle className="h-12 w-12 text-red-500 mb-2" />
+                    <XCircle className="h-12 w-12 text-destructive mb-2" />
                     <h3 className="text-xl font-cyber font-semibold text-white">Respuesta Incorrecta</h3>
                     <p className="text-gray-300 mt-2">Has perdido una vida</p>
                   </div>
@@ -68,16 +68,25 @@ export default function ChallengeCard({
               </div>
 
               <div className="bg-cyberdark p-4 rounded-lg mb-4">
-                <h4 className="text-lg font-medium mb-2 text-cyberaccent">Respuesta correcta:</h4>
-                <div className="mb-2 bg-black bg-opacity-30 p-3 rounded-md border border-green-500">
-                  <Latex formula={challenge.options.find(opt => opt.id === challenge.correctOptionId)?.formula || ""} />
+                <h4 className="text-lg font-medium mb-2 text-cyberaccent">Tu respuesta:</h4>
+                <div className={`mb-2 bg-black bg-opacity-30 p-3 rounded-md border ${isCorrect ? 'border-green-500' : 'border-destructive'}`}>
+                  <Latex formula={challenge.options.find(opt => opt.id === selectedOption)?.formula || ""} />
                 </div>
+                
+                {!isCorrect && (
+                  <div className="mb-2">
+                    <h4 className="text-lg font-medium mb-2 text-cyberaccent">Respuesta correcta:</h4>
+                    <div className="mb-2 bg-black bg-opacity-30 p-3 rounded-md border border-green-500">
+                      <Latex formula={challenge.options.find(opt => opt.id === challenge.correctOptionId)?.formula || ""} />
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="bg-cyberdark p-4 rounded-lg">
-                <h4 className="text-lg font-medium mb-2 text-cyberaccent">Explicación:</h4>
+                <h4 className="text-lg font-medium mb-2 text-cyberaccent">Explicación paso a paso:</h4>
                 <div className="bg-black bg-opacity-30 p-3 rounded-md">
-                  <Latex formula={challenge.explanation} />
+                  <Latex formula={challenge.explanation} displayMode={true} />
                 </div>
               </div>
             </div>

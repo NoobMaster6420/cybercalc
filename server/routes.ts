@@ -274,7 +274,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "h'(x) = 3x^2 \\cdot e^x \\cdot x" }
         ],
         correctOptionId: "c",
-        explanation: "Aplicamos la regla del producto $(f \\cdot g)' = f' \\cdot g + f \\cdot g'$. Aquí, $f(x) = x^3$ y $g(x) = e^x$. La derivada de $f(x)$ es $f'(x) = 3x^2$ y la derivada de $g(x)$ es $g'(x) = e^x$. Por lo tanto, $h'(x) = 3x^2 \\cdot e^x + x^3 \\cdot e^x = (3x^2 + x^3) \\cdot e^x$.",
+        explanation: "\\begin{align} \\frac{d}{dx}[x^3 \\cdot e^x] &= \\frac{d}{dx}[x^3] \\cdot e^x + x^3 \\cdot \\frac{d}{dx}[e^x] \\\\ &= 3x^2 \\cdot e^x + x^3 \\cdot e^x \\\\ &= e^x \\cdot (3x^2 + x^3) \\\\ &= h'(x) \\end{align} Aquí aplicamos la regla del producto: $(f \\cdot g)' = f' \\cdot g + f \\cdot g'$ donde $f(x) = x^3$ con $f'(x) = 3x^2$ y $g(x) = e^x$ con $g'(x) = e^x$. Observa que podemos factorizar $e^x$ del resultado final.",
         points: 35
       }
     ];
