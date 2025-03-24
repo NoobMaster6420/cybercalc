@@ -82,7 +82,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Update user points
       const user = await storage.getUser(req.user.id);
       if (user) {
-        await storage.updateUserPoints(user.id, user.points + quizData.score);
+        const newPoints = user.points + quiz.score;
+        await storage.updateUserPoints(user.id, newPoints);
+        quiz.score = quiz.score; // Ensure the correct score is returned
       }
 
       res.status(201).json(quiz);
