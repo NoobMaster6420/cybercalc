@@ -429,8 +429,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "c", formula: "h'(x) = 12x\\cos(2x^2 + 1)" },
           { id: "d", formula: "h'(x) = 6x\\cos(2x^2 + 1)" }
         ],
-        correctOptionId: "c",
-        explanation: "\\begin{align} \\frac{d}{dx}[3\\sin(2x^2 + 1)] &= 3 \\cdot \\frac{d}{dx}[\\sin(2x^2 + 1)] \\\\ &= 3 \\cdot \\cos(2x^2 + 1) \\cdot \\frac{d}{dx}[2x^2 + 1] \\\\ &= 3 \\cdot \\cos(2x^2 + 1) \\cdot 4x \\\\ &= 12x\\cos(2x^2 + 1) \\end{align}",
+        correctOptionId: "b",
+        explanation: "\\begin{align} \\frac{d}{dx}[3\\sin(2x^2 + 1)] &= 3 \\cdot \\frac{d}{dx}[\\sin(2x^2 + 1)] \\\\ &= 3 \\cdot \\cos(2x^2 + 1) \\cdot \\frac{d}{dx}[2x^2 + 1] \\\\ &= 3 \\cdot \\cos(2x^2 + 1) \\cdot 4x \\\\ &= 6x\\cos(2x^2 + 1) \\end{align}",
         points: 40
       },
       // Ejercicio de aplicación práctica
