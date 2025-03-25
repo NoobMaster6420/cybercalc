@@ -151,38 +151,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
     // Static predefined questions
     const questions = [
-      // Easy questions
-      {
-        id: 1,
-        question: "Calcula la derivada de la siguiente función:",
-        formula: "f(x) = 3x^2 - 2x + 5",
-        options: [
-          { id: "a", formula: "f'(x) = 6x - 2" },
-          { id: "b", formula: "f'(x) = 6x^2 - 2" },
-          { id: "c", formula: "f'(x) = 3x - 2 + 5" },
-          { id: "d", formula: "f'(x) = 3 \\cdot 2x - 2 \\cdot 1" }
-        ],
-        correctOptionId: "a",
-        explanation: "\\begin{align} \\frac{d}{dx}[3x^2 - 2x + 5] &= \\frac{d}{dx}[3x^2] + \\frac{d}{dx}[-2x] + \\frac{d}{dx}[5] \\\\ &= 3 \\cdot \\frac{d}{dx}[x^2] - 2 \\cdot \\frac{d}{dx}[x] + \\frac{d}{dx}[5] \\\\ &= 3 \\cdot 2x^{2-1} - 2 \\cdot 1 + 0 \\\\ &= 6x - 2 \\\\ &= f'(x) \\end{align}",
-        difficulty: "easy"
-      },
-      {
-        id: 2,
-        question: "Encuentra la derivada de:",
-        formula: "g(x) = 5x^3 + 2x",
-        options: [
-          { id: "a", formula: "g'(x) = 15x^2 + 2" },
-          { id: "b", formula: "g'(x) = 5x^2 + 2" },
-          { id: "c", formula: "g'(x) = 15x^2" },
-          { id: "d", formula: "g'(x) = 15x^3 + 2" }
-        ],
-        correctOptionId: "a",
-        explanation: "\\begin{align} \\frac{d}{dx}[5x^3 + 2x] &= \\frac{d}{dx}[5x^3] + \\frac{d}{dx}[2x] \\\\ &= 5 \\cdot \\frac{d}{dx}[x^3] + 2 \\cdot \\frac{d}{dx}[x] \\\\ &= 5 \\cdot 3x^{3-1} + 2 \\cdot 1 \\\\ &= 15x^2 + 2 \\\\ &= g'(x) \\end{align}",
-        difficulty: "easy"
-      },
       // Teoría - Fácil
       {
-        id: 3,
+        id: 1,
         question: "¿Cuál de las siguientes afirmaciones sobre la derivada es correcta?",
         formula: "",
         options: [
@@ -197,7 +168,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       },
       // Ejercicio coeficiente - Fácil
       {
-        id: 4,
+        id: 2,
         question: "Calcula la derivada aplicando la regla del coeficiente constante:",
         formula: "h(x) = 7\\sin(x)",
         options: [
@@ -212,7 +183,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       },
       // Medium questions
       {
-        id: 5,
+        id: 3,
         question: "Calcula la derivada usando la regla del producto:",
         formula: "h(x) = x^2 \\cdot \\sin(x)",
         options: [
@@ -226,7 +197,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         difficulty: "medium"
       },
       {
-        id: 6,
+        id: 4,
         question: "Calcula la derivada usando la regla de la cadena:",
         formula: "j(x) = \\sin(x^2)",
         options: [
@@ -241,7 +212,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       },
       // Teoría - Medio
       {
-        id: 7,
+        id: 5,
         question: "¿Cuál es el enunciado correcto de la regla de la cadena?",
         formula: "",
         options: [
@@ -256,7 +227,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       },
       // Ejercicio cadena - Medio
       {
-        id: 8,
+        id: 6,
         question: "Calcula la derivada aplicando la regla de la cadena:",
         formula: "f(x) = \\ln(4x^2 + 3)",
         options: [
@@ -271,7 +242,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       },
       // Hard questions
       {
-        id: 9,
+        id: 7,
         question: "Calcula la derivada usando la regla del cociente:",
         formula: "k(x) = \\frac{x^2}{\\cos(x)}",
         options: [
@@ -285,7 +256,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         difficulty: "hard"
       },
       {
-        id: 10,
+        id: 8,
         question: "Encuentra la derivada de la función:",
         formula: "m(x) = e^{\\sin(x^2)}",
         options: [
@@ -300,7 +271,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       },
       // Teoría - Difícil
       {
-        id: 11,
+        id: 9,
         question: "¿Qué establece el Teorema Fundamental del Cálculo en relación con las derivadas e integrales?",
         formula: "",
         options: [
@@ -315,7 +286,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       },
       // Ejercicio cadena y coeficiente - Difícil
       {
-        id: 12,
+        id: 10,
         question: "Calcula la derivada aplicando la regla del coeficiente y de la cadena:",
         formula: "f(x) = 5\\sqrt{3x^3 + 2x}",
         options: [
