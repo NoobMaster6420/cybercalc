@@ -20,7 +20,7 @@ interface QuestionCardProps {
 export default function QuestionCard({
   question,
   questionNumber,
-  totalQuestions: displayTotal,
+  totalQuestions:
   selectedOption,
   onSelectOption,
   onVerifyAnswer
@@ -29,8 +29,6 @@ export default function QuestionCard({
   const { data: userProgress } = useQuery<UserProgress>({
     queryKey: ["/api/user/progress"],
   });
-
-  const displayTotal = 10; // Fixed total to 10 questions
 
   return (
     <motion.div
