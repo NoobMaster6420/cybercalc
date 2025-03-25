@@ -157,13 +157,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         question: "¿Cuál de las siguientes afirmaciones sobre la derivada es correcta?",
         formula: "",
         options: [
-          { id: "a", formula: "\\text{La derivada es el valor}" + "\\\\\\text{de la función en ese punto}" },
-          { id: "b", formula: "\\text{La derivada representa}" + "\\\\\\text{la pendiente de la recta tangente}" },
-          { id: "c", formula: "\\text{La derivada siempre es}" + "\\\\\\text{mayor que la función original}" },
-          { id: "d", formula: "\\text{La derivada siempre tiene}" + "\\\\\\text{el mismo signo que la función}" }
+          { id: "a", formula: "La derivada de una función en un punto es el valor de la función en ese punto" },
+          { id: "b", formula: "La derivada de una función representa la pendiente de la recta tangente a la función en un punto" },
+          { id: "c", formula: "La derivada siempre es mayor que la función original" },
+          { id: "d", formula: "La derivada siempre tiene el mismo signo que la función original" }
         ],
         correctOptionId: "b",
-        explanation: "La derivada de una función en un punto representa la pendiente de la recta tangente en ese punto, indicando la tasa de cambio instantánea.",
+        explanation: "La derivada de una función en un punto representa la pendiente de la recta tangente a la gráfica de la función en ese punto. Esto nos da información sobre la tasa de cambio instantánea de la función.",
         difficulty: "easy"
       },
       // Ejercicio coeficiente - Fácil
