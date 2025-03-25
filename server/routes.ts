@@ -157,10 +157,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         question: "¿Cuál de las siguientes afirmaciones sobre la derivada es correcta?",
         formula: "",
         options: [
-          { id: "a", formula: "La derivada de una función en un punto es el valor de la función en ese punto" },
-          { id: "b", formula: "La derivada de una función representa la pendiente de la recta tangente a la función en un punto" },
-          { id: "c", formula: "La derivada siempre es mayor que la función original" },
-          { id: "d", formula: "La derivada siempre tiene el mismo signo que la función original" }
+          { id: "a", formula: "\\text{La derivada de una función}" + "\\\\\\text{en un punto es el valor}" + "\\\\\\text{de la función en ese punto}" },
+          { id: "b", formula: "\\text{La derivada de una función representa}" + "\\\\\\text{la pendiente de la recta tangente}" + "\\\\\\text{a la función en un punto}" },
+          { id: "c", formula: "\\text{La derivada siempre es}" + "\\\\\\text{mayor que la función original}" },
+          { id: "d", formula: "\\text{La derivada siempre tiene}" + "\\\\\\text{el mismo signo que la función original}" }
         ],
         correctOptionId: "b",
         explanation: "La derivada de una función en un punto representa la pendiente de la recta tangente a la gráfica de la función en ese punto. Esto nos da información sobre la tasa de cambio instantánea de la función.",
@@ -275,10 +275,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         question: "¿Qué establece el Teorema Fundamental del Cálculo en relación con las derivadas e integrales?",
         formula: "",
         options: [
-          { id: "a", formula: "La derivada y la integral son operaciones independientes sin relación" },
-          { id: "b", formula: "La derivada de la integral definida de una función es igual a la función original" },
-          { id: "c", formula: "La integral definida de la derivada de una función es igual a la diferencia de valores de la función en los extremos del intervalo" },
-          { id: "d", formula: "La derivada de la integral de una función siempre es cero" }
+          { id: "a", formula: "\\text{La derivada y la integral son}" + "\\\\\\text{operaciones independientes sin relación}" },
+          { id: "b", formula: "\\text{La derivada de la integral definida}" + "\\\\\\text{de una función es igual}" + "\\\\\\text{a la función original}" },
+          { id: "c", formula: "\\text{La integral definida de la derivada}" + "\\\\\\text{de una función es igual a la diferencia}" + "\\\\\\text{de valores en los extremos}" },
+          { id: "d", formula: "\\text{La derivada de la integral}" + "\\\\\\text{de una función siempre es cero}" }
         ],
         correctOptionId: "c",
         explanation: "El Teorema Fundamental del Cálculo establece que si F es una antiderivada de f, entonces la integral definida de f en el intervalo [a,b] es igual a F(b) - F(a). Esto demuestra la relación inversa entre derivación e integración: \\int_a^b f'(x)dx = f(b) - f(a).",
