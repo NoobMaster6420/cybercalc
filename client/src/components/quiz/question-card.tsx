@@ -20,7 +20,7 @@ interface QuestionCardProps {
 export default function QuestionCard({
   question,
   questionNumber,
-  totalQuestions:
+  totalQuestions,
   selectedOption,
   onSelectOption,
   onVerifyAnswer
