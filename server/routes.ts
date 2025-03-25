@@ -77,8 +77,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
         completedAt: new Date().toISOString()
       });
 
-      // Mantener el puntaje original sin modificaciones
-      const quiz = await storage.createQuiz(quizData);
+      // Calcular puntos basado en la dificultad
+      let pointMultiplier = 1.5;
+      switch (quizData.difficulty) {
+        case 'medium':
+          pointMultiplier = 2;
+          break;
+        case 'hard':
+          pointMultiplier = 2.5;
+          break;
+      }
+
+      const finalScore = Math.round(quizData.score * pointMultiplier);
+      const quizWithScore = { ...quizData, score: finalScore };
+      const quiz = await storage.createQuiz(quizWithScore);
 
       // Actualizar puntos del usuario
       const user = await storage.getUser(req.user.id);
@@ -106,10 +118,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const challenge = await storage.createChallenge(challengeData);
 
-      // Update user points
+      // Update user points with challenge score
       const user = await storage.getUser(req.user.id);
       if (user) {
-        await storage.updateUserPoints(user.id, user.points + challengeData.score);
+        const finalScore = challengeData.score;
+        const newPoints = user.points + finalScore;
+        await storage.updateUserPoints(user.id, newPoints);
+        challenge.score = finalScore; // Ensure correct score is returned
       }
 
       res.status(201).json(challenge);
