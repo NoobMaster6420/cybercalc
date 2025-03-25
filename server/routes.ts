@@ -180,9 +180,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
         explanation: "\\begin{align} \\frac{d}{dx}[5x^3 + 2x] &= \\frac{d}{dx}[5x^3] + \\frac{d}{dx}[2x] \\\\ &= 5 \\cdot \\frac{d}{dx}[x^3] + 2 \\cdot \\frac{d}{dx}[x] \\\\ &= 5 \\cdot 3x^{3-1} + 2 \\cdot 1 \\\\ &= 15x^2 + 2 \\\\ &= g'(x) \\end{align}",
         difficulty: "easy"
       },
-      // Medium questions
+      // Teoría - Fácil
       {
         id: 3,
+        question: "¿Cuál de las siguientes afirmaciones sobre la derivada es correcta?",
+        formula: "",
+        options: [
+          { id: "a", formula: "La derivada de una función en un punto es el valor de la función en ese punto" },
+          { id: "b", formula: "La derivada de una función representa la pendiente de la recta tangente a la función en un punto" },
+          { id: "c", formula: "La derivada siempre es mayor que la función original" },
+          { id: "d", formula: "La derivada siempre tiene el mismo signo que la función original" }
+        ],
+        correctOptionId: "b",
+        explanation: "La derivada de una función en un punto representa la pendiente de la recta tangente a la gráfica de la función en ese punto. Esto nos da información sobre la tasa de cambio instantánea de la función.",
+        difficulty: "easy"
+      },
+      // Ejercicio coeficiente - Fácil
+      {
+        id: 4,
+        question: "Calcula la derivada aplicando la regla del coeficiente constante:",
+        formula: "h(x) = 7\\sin(x)",
+        options: [
+          { id: "a", formula: "h'(x) = 7\\cos(x)" },
+          { id: "b", formula: "h'(x) = \\cos(x)" },
+          { id: "c", formula: "h'(x) = -7\\sin(x)" },
+          { id: "d", formula: "h'(x) = 7" }
+        ],
+        correctOptionId: "a",
+        explanation: "\\begin{align} \\frac{d}{dx}[7\\sin(x)] &= 7 \\cdot \\frac{d}{dx}[\\sin(x)] \\\\ &= 7 \\cdot \\cos(x) \\\\ &= 7\\cos(x) \\end{align}",
+        difficulty: "easy"
+      },
+      // Medium questions
+      {
+        id: 5,
         question: "Calcula la derivada usando la regla del producto:",
         formula: "h(x) = x^2 \\cdot \\sin(x)",
         options: [
@@ -196,7 +226,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         difficulty: "medium"
       },
       {
-        id: 4,
+        id: 6,
         question: "Calcula la derivada usando la regla de la cadena:",
         formula: "j(x) = \\sin(x^2)",
         options: [
@@ -209,9 +239,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
         explanation: "\\begin{align} \\frac{d}{dx}[\\sin(x^2)] &= \\frac{d}{du}[\\sin(u)] \\cdot \\frac{du}{dx} \\quad \\text{donde } u = x^2 \\\\ &= \\cos(x^2) \\cdot \\frac{d}{dx}[x^2] \\\\ &= \\cos(x^2) \\cdot 2x \\\\ &= 2x \\cdot \\cos(x^2) \\\\ &= j'(x) \\end{align}",
         difficulty: "medium"
       },
+      // Teoría - Medio
+      {
+        id: 7,
+        question: "¿Cuál es el enunciado correcto de la regla de la cadena?",
+        formula: "",
+        options: [
+          { id: "a", formula: "Si y = f(g(x)), entonces \\frac{dy}{dx} = f'(g(x)) + g'(x)" },
+          { id: "b", formula: "Si y = f(g(x)), entonces \\frac{dy}{dx} = f'(g(x)) \\cdot g'(x)" },
+          { id: "c", formula: "Si y = f(g(x)), entonces \\frac{dy}{dx} = \\frac{f'(x)}{g'(x)}" },
+          { id: "d", formula: "Si y = f(g(x)), entonces \\frac{dy}{dx} = f'(x) \\cdot g'(x)" }
+        ],
+        correctOptionId: "b",
+        explanation: "La regla de la cadena establece que si tenemos una función compuesta y = f(g(x)), entonces su derivada es el producto de la derivada de la función externa evaluada en la función interna, multiplicada por la derivada de la función interna: \\frac{dy}{dx} = f'(g(x)) \\cdot g'(x)",
+        difficulty: "medium"
+      },
+      // Ejercicio cadena - Medio
+      {
+        id: 8,
+        question: "Calcula la derivada aplicando la regla de la cadena:",
+        formula: "f(x) = \\ln(4x^2 + 3)",
+        options: [
+          { id: "a", formula: "f'(x) = \\frac{1}{4x^2 + 3}" },
+          { id: "b", formula: "f'(x) = \\frac{8x}{4x^2 + 3}" },
+          { id: "c", formula: "f'(x) = \\frac{4x^2 + 3}{8x}" },
+          { id: "d", formula: "f'(x) = \\frac{8x^2}{4x^2 + 3}" }
+        ],
+        correctOptionId: "b",
+        explanation: "\\begin{align} \\frac{d}{dx}[\\ln(4x^2 + 3)] &= \\frac{1}{4x^2 + 3} \\cdot \\frac{d}{dx}[4x^2 + 3] \\\\ &= \\frac{1}{4x^2 + 3} \\cdot 8x \\\\ &= \\frac{8x}{4x^2 + 3} \\end{align}",
+        difficulty: "medium"
+      },
       // Hard questions
       {
-        id: 5,
+        id: 9,
         question: "Calcula la derivada usando la regla del cociente:",
         formula: "k(x) = \\frac{x^2}{\\cos(x)}",
         options: [
@@ -225,7 +285,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         difficulty: "hard"
       },
       {
-        id: 6,
+        id: 10,
         question: "Encuentra la derivada de la función:",
         formula: "m(x) = e^{\\sin(x^2)}",
         options: [
@@ -236,6 +296,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
         ],
         correctOptionId: "a",
         explanation: "\\begin{align} \\frac{d}{dx}[e^{\\sin(x^2)}] &= e^{\\sin(x^2)} \\cdot \\frac{d}{dx}[\\sin(x^2)] \\\\ &= e^{\\sin(x^2)} \\cdot \\cos(x^2) \\cdot \\frac{d}{dx}[x^2] \\\\ &= e^{\\sin(x^2)} \\cdot \\cos(x^2) \\cdot 2x \\\\ &= m'(x) \\end{align}",
+        difficulty: "hard"
+      },
+      // Teoría - Difícil
+      {
+        id: 11,
+        question: "¿Qué establece el Teorema Fundamental del Cálculo en relación con las derivadas e integrales?",
+        formula: "",
+        options: [
+          { id: "a", formula: "La derivada y la integral son operaciones independientes sin relación" },
+          { id: "b", formula: "La derivada de la integral definida de una función es igual a la función original" },
+          { id: "c", formula: "La integral definida de la derivada de una función es igual a la diferencia de valores de la función en los extremos del intervalo" },
+          { id: "d", formula: "La derivada de la integral de una función siempre es cero" }
+        ],
+        correctOptionId: "c",
+        explanation: "El Teorema Fundamental del Cálculo establece que si F es una antiderivada de f, entonces la integral definida de f en el intervalo [a,b] es igual a F(b) - F(a). Esto demuestra la relación inversa entre derivación e integración: \\int_a^b f'(x)dx = f(b) - f(a).",
+        difficulty: "hard"
+      },
+      // Ejercicio cadena y coeficiente - Difícil
+      {
+        id: 12,
+        question: "Calcula la derivada aplicando la regla del coeficiente y de la cadena:",
+        formula: "f(x) = 5\\sqrt{3x^3 + 2x}",
+        options: [
+          { id: "a", formula: "f'(x) = \\frac{5(9x^2 + 2)}{2\\sqrt{3x^3 + 2x}}" },
+          { id: "b", formula: "f'(x) = \\frac{15x^2 + 10}{\\sqrt{3x^3 + 2x}}" },
+          { id: "c", formula: "f'(x) = 5 \\cdot \\frac{1}{2}(3x^3 + 2x)^{-\\frac{1}{2}} \\cdot (9x^2 + 2)" },
+          { id: "d", formula: "f'(x) = \\frac{5}{2\\sqrt{3x^3 + 2x}} \\cdot (9x^2 + 2)" }
+        ],
+        correctOptionId: "d",
+        explanation: "\\begin{align} \\frac{d}{dx}[5\\sqrt{3x^3 + 2x}] &= 5 \\cdot \\frac{d}{dx}[(3x^3 + 2x)^{\\frac{1}{2}}] \\\\ &= 5 \\cdot \\frac{1}{2}(3x^3 + 2x)^{-\\frac{1}{2}} \\cdot \\frac{d}{dx}[3x^3 + 2x] \\\\ &= 5 \\cdot \\frac{1}{2}(3x^3 + 2x)^{-\\frac{1}{2}} \\cdot (9x^2 + 2) \\\\ &= \\frac{5(9x^2 + 2)}{2\\sqrt{3x^3 + 2x}} \\\\ &= \\frac{5}{2\\sqrt{3x^3 + 2x}} \\cdot (9x^2 + 2) \\end{align}",
         difficulty: "hard"
       }
     ];
@@ -252,6 +342,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/challenges", (req, res) => {
     // Static predefined challenge questions
     const challenges = [
+      // Ejercicio de regla de la cadena
       {
         id: 1,
         question: "Encuentra la derivada de la función compuesta:",
@@ -266,6 +357,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         explanation: "\\begin{align} \\frac{d}{dx}[\\sin(x^2 + 3x)] &= \\frac{d}{du}[\\sin(u)] \\cdot \\frac{du}{dx} \\quad \\text{donde } u = x^2 + 3x \\\\ &= \\cos(x^2 + 3x) \\cdot \\frac{d}{dx}[x^2 + 3x] \\\\ &= \\cos(x^2 + 3x) \\cdot (2x + 3) \\\\ &= f'(x) \\end{align}",
         points: 25
       },
+      // Ejercicio de combinación de reglas
       {
         id: 2,
         question: "Calcula la derivada de la función:",
@@ -280,6 +372,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         explanation: "\\begin{align} \\frac{d}{dx}[\\ln(\\cos(x))] &= \\frac{d}{du}[\\ln(u)] \\cdot \\frac{du}{dx} \\quad \\text{donde } u = \\cos(x) \\\\ &= \\frac{1}{u} \\cdot \\frac{d}{dx}[\\cos(x)] \\\\ &= \\frac{1}{\\cos(x)} \\cdot (-\\sin(x)) \\\\ &= -\\frac{\\sin(x)}{\\cos(x)} \\\\ &= -\\tan(x) \\\\ &= g'(x) \\end{align}",
         points: 30
       },
+      // Ejercicio de regla del producto
       {
         id: 3,
         question: "Encuentra la derivada usando la regla del producto:",
@@ -293,6 +386,111 @@ export async function registerRoutes(app: Express): Promise<Server> {
         correctOptionId: "c",
         explanation: "\\begin{align} \\frac{d}{dx}[x^3 \\cdot e^x] &= \\frac{d}{dx}[x^3] \\cdot e^x + x^3 \\cdot \\frac{d}{dx}[e^x] \\\\ &= 3x^2 \\cdot e^x + x^3 \\cdot e^x \\\\ &= e^x \\cdot (3x^2 + x^3) \\\\ &= h'(x) \\end{align}",
         points: 35
+      },
+      // Teoría sobre derivadas 
+      {
+        id: 4,
+        question: "¿Qué representa geométricamente la segunda derivada de una función?",
+        formula: "",
+        options: [
+          { id: "a", formula: "La pendiente de la recta tangente" },
+          { id: "b", formula: "La curvatura o concavidad de la función" },
+          { id: "c", formula: "El área bajo la curva" },
+          { id: "d", formula: "La distancia entre dos puntos de la función" }
+        ],
+        correctOptionId: "b",
+        explanation: "La segunda derivada de una función representa la tasa de cambio de la primera derivada, lo que geométricamente indica cómo cambia la pendiente a lo largo de la curva. Esto nos permite determinar la concavidad (hacia arriba o hacia abajo) de la gráfica de la función en un punto dado.",
+        points: 40
+      },
+      // Ejercicio de coeficiente
+      {
+        id: 5,
+        question: "Calcula la derivada aplicando la regla del coeficiente:",
+        formula: "f(x) = 12x^4 - 8x^3 + 6x^2",
+        options: [
+          { id: "a", formula: "f'(x) = 12 \\cdot 4x^3 - 8 \\cdot 3x^2 + 6 \\cdot 2x" },
+          { id: "b", formula: "f'(x) = 48x^3 - 24x^2 + 12x" },
+          { id: "c", formula: "f'(x) = 48x^3 - 8x^2 + 6x" },
+          { id: "d", formula: "f'(x) = 48x^3 - 24x^2 + 6x" }
+        ],
+        correctOptionId: "b",
+        explanation: "\\begin{align} \\frac{d}{dx}[12x^4 - 8x^3 + 6x^2] &= 12 \\cdot \\frac{d}{dx}[x^4] - 8 \\cdot \\frac{d}{dx}[x^3] + 6 \\cdot \\frac{d}{dx}[x^2] \\\\ &= 12 \\cdot 4x^3 - 8 \\cdot 3x^2 + 6 \\cdot 2x \\\\ &= 48x^3 - 24x^2 + 12x \\end{align}",
+        points: 30
+      },
+      // Ejercicio de regla de la cadena complejo
+      {
+        id: 6,
+        question: "Aplica la regla de la cadena para encontrar la derivada:",
+        formula: "g(x) = (2x^3 + 5x)^4",
+        options: [
+          { id: "a", formula: "g'(x) = 4(2x^3 + 5x)^3 \\cdot (6x^2 + 5)" },
+          { id: "b", formula: "g'(x) = 4(2x^3 + 5x)^3" },
+          { id: "c", formula: "g'(x) = (2x^3 + 5x)^3 \\cdot (6x^2 + 5)" },
+          { id: "d", formula: "g'(x) = 4 \\cdot 3(2x^3 + 5x)^2 \\cdot (6x^2 + 5)" }
+        ],
+        correctOptionId: "a",
+        explanation: "\\begin{align} \\frac{d}{dx}[(2x^3 + 5x)^4] &= 4(2x^3 + 5x)^{4-1} \\cdot \\frac{d}{dx}[2x^3 + 5x] \\\\ &= 4(2x^3 + 5x)^3 \\cdot (\\frac{d}{dx}[2x^3] + \\frac{d}{dx}[5x]) \\\\ &= 4(2x^3 + 5x)^3 \\cdot (2 \\cdot 3x^2 + 5) \\\\ &= 4(2x^3 + 5x)^3 \\cdot (6x^2 + 5) \\end{align}",
+        points: 45
+      },
+      // Teoría sobre aplicaciones de derivadas
+      {
+        id: 7,
+        question: "¿Cuál es la aplicación principal de las derivadas en el estudio de la física?",
+        formula: "",
+        options: [
+          { id: "a", formula: "Calcular la masa de los objetos" },
+          { id: "b", formula: "Determinar la densidad de los materiales" },
+          { id: "c", formula: "Analizar la velocidad y aceleración de objetos en movimiento" },
+          { id: "d", formula: "Calcular la resistencia de los materiales" }
+        ],
+        correctOptionId: "c",
+        explanation: "En física, una de las aplicaciones más importantes de las derivadas es el análisis del movimiento. La primera derivada de la posición respecto al tiempo representa la velocidad, mientras que la segunda derivada representa la aceleración. Esto permite describir matemáticamente el movimiento de los objetos y aplicar las leyes de Newton.",
+        points: 35
+      },
+      // Ejercicio combinado de cadena y coeficiente
+      {
+        id: 8,
+        question: "Encuentra la derivada aplicando las reglas del coeficiente y de la cadena:",
+        formula: "h(x) = 3\\sin(2x^2 + 1)",
+        options: [
+          { id: "a", formula: "h'(x) = 3\\cos(2x^2 + 1) \\cdot 4x" },
+          { id: "b", formula: "h'(x) = 6\\cos(2x^2 + 1) \\cdot x" },
+          { id: "c", formula: "h'(x) = 12x\\cos(2x^2 + 1)" },
+          { id: "d", formula: "h'(x) = 6x\\cos(2x^2 + 1)" }
+        ],
+        correctOptionId: "b",
+        explanation: "\\begin{align} \\frac{d}{dx}[3\\sin(2x^2 + 1)] &= 3 \\cdot \\frac{d}{dx}[\\sin(2x^2 + 1)] \\\\ &= 3 \\cdot \\cos(2x^2 + 1) \\cdot \\frac{d}{dx}[2x^2 + 1] \\\\ &= 3 \\cdot \\cos(2x^2 + 1) \\cdot 4x \\\\ &= 6x\\cos(2x^2 + 1) \\end{align}",
+        points: 40
+      },
+      // Ejercicio de aplicación práctica
+      {
+        id: 9,
+        question: "En un problema de optimización, un ingeniero necesita encontrar el punto crítico de la función de costo. ¿Cuál es la derivada de esta función?",
+        formula: "C(x) = 2x^3 - 15x^2 + 36x + 10",
+        options: [
+          { id: "a", formula: "C'(x) = 6x^2 - 30x + 36" },
+          { id: "b", formula: "C'(x) = 2x^2 - 15x + 36" },
+          { id: "c", formula: "C'(x) = 6x^2 - 15x + 36" },
+          { id: "d", formula: "C'(x) = 6x^2 - 30x + 10" }
+        ],
+        correctOptionId: "a",
+        explanation: "\\begin{align} \\frac{d}{dx}[2x^3 - 15x^2 + 36x + 10] &= \\frac{d}{dx}[2x^3] - \\frac{d}{dx}[15x^2] + \\frac{d}{dx}[36x] + \\frac{d}{dx}[10] \\\\ &= 2 \\cdot 3x^2 - 15 \\cdot 2x + 36 \\cdot 1 + 0 \\\\ &= 6x^2 - 30x + 36 \\end{align}",
+        points: 35
+      },
+      // Ejercicio que combina múltiples reglas
+      {
+        id: 10,
+        question: "Calcula la derivada de esta función compuesta que combina múltiples reglas:",
+        formula: "f(x) = e^{x^2} \\cdot \\cos(3x)",
+        options: [
+          { id: "a", formula: "f'(x) = 2xe^{x^2} \\cdot \\cos(3x) - 3e^{x^2} \\cdot \\sin(3x)" },
+          { id: "b", formula: "f'(x) = e^{x^2} \\cdot \\cos(3x) \\cdot 2x - 3e^{x^2} \\cdot \\sin(3x)" },
+          { id: "c", formula: "f'(x) = e^{x^2} \\cdot (-3\\sin(3x)) + \\cos(3x) \\cdot e^{x^2} \\cdot 2x" },
+          { id: "d", formula: "f'(x) = 2xe^{x^2} \\cdot \\cos(3x) - 3\\sin(3x)" }
+        ],
+        correctOptionId: "c",
+        explanation: "Para calcular esta derivada, aplicamos la regla del producto: \\begin{align} \\frac{d}{dx}[e^{x^2} \\cdot \\cos(3x)] &= \\frac{d}{dx}[e^{x^2}] \\cdot \\cos(3x) + e^{x^2} \\cdot \\frac{d}{dx}[\\cos(3x)] \\\\ &= e^{x^2} \\cdot 2x \\cdot \\cos(3x) + e^{x^2} \\cdot (-\\sin(3x)) \\cdot 3 \\\\ &= e^{x^2} \\cdot \\cos(3x) \\cdot 2x - 3e^{x^2} \\cdot \\sin(3x) \\\\ &= e^{x^2} \\cdot (-3\\sin(3x)) + \\cos(3x) \\cdot e^{x^2} \\cdot 2x \\end{align}",
+        points: 50
       }
     ];
 
