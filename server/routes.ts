@@ -163,7 +163,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "\\text{La derivada siempre tiene el mismo signo que la función original}" }
         ],
         correctOptionId: "b",
-        explanation: "\\text{La derivada de una función en un punto representa la pendiente de la recta}" + "\\text{tangente a la gráfica de la función en ese punto. Esto nos da información sobre la" + "\\text{tasa de cambio instantánea de la función.}",
+        explanation: "\\text{La derivada de una función en un punto representa la pendiente de la recta}" + "\\\\\\text{tangente a la gráfica de la función en ese punto. Esto nos da información sobre la}" + "\\\\\\text{tasa de cambio instantánea de la función.}",
         difficulty: "easy"
       },
       // Ejercicio coeficiente - Fácil
@@ -222,7 +222,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "Si y = f(g(x)), entonces \\frac{dy}{dx} = f'(x) \\cdot g'(x)" }
         ],
         correctOptionId: "b",
-        explanation: "La regla de la cadena establece que si tenemos una función compuesta y = f(g(x)), entonces su derivada es el producto de la derivada de la función externa evaluada en la función interna, multiplicada por la derivada de la función interna: \\frac{dy}{dx} = f'(g(x)) \\cdot g'(x)",
+        explanation: "\\text{La regla de la cadena establece que si tenemos una función compuesta}" + "y = f(g(x))" + "\\\\\\text{entonces su derivada es el producto de la derivada de la función externa evaluada}" + "\\\\\\text{en la función interna, multiplicada por la derivada de la función interna:}" + "\\\\\\frac{dy}{dx} = f'(g(x)) \\cdot g'(x)",
         difficulty: "medium"
       },
       // Ejercicio cadena - Medio
@@ -275,13 +275,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         question: "¿Qué establece el Teorema Fundamental del Cálculo en relación con las derivadas e integrales?",
         formula: "",
         options: [
-          { id: "a", formula: "\\text{La derivada y la integral son}" + "\\\\\\text{operaciones independientes sin relación}" },
-          { id: "b", formula: "\\text{La derivada de la integral definida}" + "\\\\\\text{de una función es igual}" + "\\\\\\text{a la función original}" },
-          { id: "c", formula: "\\text{La integral definida de la derivada}" + "\\\\\\text{de una función es igual a la diferencia}" + "\\\\\\text{de valores en los extremos}" },
-          { id: "d", formula: "\\text{La derivada de la integral}" + "\\\\\\text{de una función siempre es cero}" }
+          { id: "a", formula: "\\text{La derivada y la integral son operaciones independientes sin relación}" },
+          { id: "b", formula: "\\text{La derivada de la integral definida de una función es igual a la función original}" },
+          { id: "c", formula: "\\text{La integral de la derivada es igual a la diferencia de valores en los extremos}" },
+          { id: "d", formula: "\\text{La derivada de la integral de una función siempre es cero}" }
         ],
         correctOptionId: "c",
-        explanation: "El Teorema Fundamental del Cálculo establece que si F es una antiderivada de f, entonces la integral definida de f en el intervalo [a,b] es igual a F(b) - F(a). Esto demuestra la relación inversa entre derivación e integración: \\int_a^b f'(x)dx = f(b) - f(a).",
+        explanation: "\\text{El Teorema Fundamental del Cálculo establece que si F es una antiderivada de f}" + "\\\\\\text{entonces la integral definida de f en el intervalo [a,b] es igual a F(b) - F(a).}" + "\\\\\\text{Esto demuestra la relación inversa entre derivación e integración:}" + "\\\\\\int_a^b f'(x)dx = f(b) - f(a).",
         difficulty: "hard"
       },
       // Ejercicio cadena y coeficiente - Difícil
@@ -364,13 +364,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         question: "¿Qué representa geométricamente la segunda derivada de una función?",
         formula: "",
         options: [
-          { id: "a", formula: "La pendiente de la recta tangente" },
-          { id: "b", formula: "La curvatura o concavidad de la función" },
-          { id: "c", formula: "El área bajo la curva" },
-          { id: "d", formula: "La distancia entre dos puntos de la función" }
+          { id: "a", formula: "\\text{La pendiente de la recta tangente}" },
+          { id: "b", formula: "\\text{La curvatura o concavidad de la función}" },
+          { id: "c", formula: "\\text{El área bajo la curva}" },
+          { id: "d", formula: "\\text{La distancia entre dos puntos de la función}" }
         ],
         correctOptionId: "b",
-        explanation: "La segunda derivada de una función representa la tasa de cambio de la primera derivada, lo que geométricamente indica cómo cambia la pendiente a lo largo de la curva. Esto nos permite determinar la concavidad (hacia arriba o hacia abajo) de la gráfica de la función en un punto dado.",
+        explanation: "\\text{La segunda derivada de la función representa la tasa de cambio de la primera}" + "\\\\\\text{derivada lo que geométricamente indica cómo cambia la pendiente a lo largo}" + "\\\\\\text{de la curva. Permite determinar la concavidad de la gráfica de la función.}",
         points: 40
       },
       // Ejercicio de coeficiente
@@ -391,7 +391,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Ejercicio de regla de la cadena complejo
       {
         id: 6,
-        question: "Aplica la regla de la cadena para encontrar la derivada:",
         formula: "g(x) = (2x^3 + 5x)^4",
         options: [
           { id: "a", formula: "g'(x) = 4(2x^3 + 5x)^3 \\cdot (6x^2 + 5)" },
@@ -409,13 +408,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         question: "¿Cuál es la aplicación principal de las derivadas en el estudio de la física?",
         formula: "",
         options: [
-          { id: "a", formula: "Calcular la masa de los objetos" },
-          { id: "b", formula: "Determinar la densidad de los materiales" },
-          { id: "c", formula: "Analizar la velocidad y aceleración de objetos en movimiento" },
-          { id: "d", formula: "Calcular la resistencia de los materiales" }
+          { id: "a", formula: "\\\\\\text{Calcular la masa de los objetos}" },
+          { id: "b", formula: "\\\\\\text{Determinar la densidad de los materiales}" },
+          { id: "c", formula: "\\\\\\text{Analizar la velocidad y aceleración de objetos en movimiento}" },
+          { id: "d", formula: "\\\\\\text{Calcular la resistencia de los materiales}" }
         ],
         correctOptionId: "c",
-        explanation: "En física, una de las aplicaciones más importantes de las derivadas es el análisis del movimiento. La primera derivada de la posición respecto al tiempo representa la velocidad, mientras que la segunda derivada representa la aceleración. Esto permite describir matemáticamente el movimiento de los objetos y aplicar las leyes de Newton.",
+        explanation: "\\text{En física, una de las aplicaciones más importantes de las derivadas es el}" + "\\\\\\text{análisis del movimiento. la primera derivada es posición respecto al tiempo }" + "\\\\\\text{representa la velocidad, mientras que la segunda derivada representa la}" + "\\\\\\text{aceleración. Permite describir el movimiento de los objetos y aplicar las}" + "\\\\\\text{leyes de Newton.}",
         points: 35
       },
       // Ejercicio combinado de cadena y coeficiente
@@ -460,7 +459,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           { id: "d", formula: "f'(x) = 2xe^{x^2} \\cdot \\cos(3x) - 3\\sin(3x)" }
         ],
         correctOptionId: "c",
-        explanation: "Para calcular esta derivada, aplicamos la regla del producto: \\begin{align} \\frac{d}{dx}[e^{x^2} \\cdot \\cos(3x)] &= \\frac{d}{dx}[e^{x^2}] \\cdot \\cos(3x) + e^{x^2} \\cdot \\frac{d}{dx}[\\cos(3x)] \\\\ &= e^{x^2} \\cdot 2x \\cdot \\cos(3x) + e^{x^2} \\cdot (-\\sin(3x)) \\cdot 3 \\\\ &= e^{x^2} \\cdot \\cos(3x) \\cdot 2x - 3e^{x^2} \\cdot \\sin(3x) \\\\ &= e^{x^2} \\cdot (-3\\sin(3x)) + \\cos(3x) \\cdot e^{x^2} \\cdot 2x \\end{align}",
+        explanation: "\\text{Para calcular esta derivada, aplicamos la regla del producto:}" + " \\begin{align} \\frac{d}{dx}[e^{x^2} \\cdot \\cos(3x)] &= \\frac{d}{dx}[e^{x^2}] \\cdot \\cos(3x) + e^{x^2} \\cdot \\frac{d}{dx}[\\cos(3x)] \\\\ &= e^{x^2} \\cdot 2x \\cdot \\cos(3x) + e^{x^2} \\cdot (-\\sin(3x)) \\cdot 3 \\\\ &= e^{x^2} \\cdot \\cos(3x) \\cdot 2x - 3e^{x^2} \\cdot \\sin(3x) \\\\ &= e^{x^2} \\cdot (-3\\sin(3x)) + \\cos(3x) \\cdot e^{x^2} \\cdot 2x \\end{align}",
         points: 50
       }
     ];

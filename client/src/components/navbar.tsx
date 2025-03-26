@@ -67,6 +67,9 @@ export default function Navbar() {
               <Link href="/ranking">
                 <a className="border-transparent hover:border-cyberaccent text-white hover:text-cyberaccent px-3 py-2 font-medium hover:bg-opacity-10 hover:bg-cyberaccent rounded-md transition duration-150">Ranking</a>
               </Link>
+              <Link href="/juego-extremo">
+                <a className="border-transparent border-red-500 text-red-400 hover:text-red-300 px-3 py-2 font-medium bg-red-900 bg-opacity-30 hover:bg-opacity-50 rounded-md transition duration-150 animate-pulse">¡Juego Extremo!</a>
+              </Link>
             </div>
           </div>
           
@@ -125,6 +128,9 @@ export default function Navbar() {
           </Link>
           <Link href="/ranking">
             <a onClick={closeMenu} className="block px-3 py-2 rounded-md text-white font-medium hover:bg-cyberprimary hover:bg-opacity-20">Ranking</a>
+          </Link>
+          <Link href="/juego-extremo">
+            <a onClick={closeMenu} className="block px-3 py-2 rounded-md text-red-400 font-medium bg-red-900 bg-opacity-30 hover:bg-opacity-50 animate-pulse">¡Juego Extremo!</a>
           </Link>
         </div>
         
