@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 
@@ -87,57 +87,103 @@ export default function GameArea({ level, onGameOver }: GameAreaProps) {
     // Iniciar el game loop
     requestRef.current = requestAnimationFrame(gameLoop);
     
-    // Event listeners para controles
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
-    
     return () => {
       cancelAnimationFrame(requestRef.current);
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
     };
   }, [level, gameWidth]);
   
+  // Agregar event listeners para controles en un efecto separado
+  useEffect(() => {
+    if (!isGameActive) return;
+    
+    // Función para capturar eventos de teclado
+    const keyDownHandler = (e: KeyboardEvent) => {
+      // Prevenir el comportamiento predeterminado (scrolling)
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", " "].includes(e.key)) {
+        e.preventDefault();
+      }
+      
+      handleKeyDown(e);
+    };
+    
+    const keyUpHandler = (e: KeyboardEvent) => {
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", " "].includes(e.key)) {
+        e.preventDefault();
+      }
+      
+      handleKeyUp(e);
+    };
+    
+    // Agregar event listeners
+    window.addEventListener("keydown", keyDownHandler);
+    window.addEventListener("keyup", keyUpHandler);
+    
+    // Focus en el elemento del juego
+    if (canvasRef.current) {
+      canvasRef.current.focus();
+    }
+    
+    // Mensaje sobre los controles
+    toast({
+      title: "Controles del juego",
+      description: "Usa las flechas o WASD para mover el personaje",
+    });
+    
+    return () => {
+      // Limpiar event listeners
+      window.removeEventListener("keydown", keyDownHandler);
+      window.removeEventListener("keyup", keyUpHandler);
+    };
+  }, [isGameActive]);
+  
   // Manejar las teclas presionadas
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLCanvasElement> | KeyboardEvent) => {
     if (!isGameActive) return;
     
     switch (e.key) {
       case "ArrowUp":
       case "w":
+      case "W":
         setKeys(prev => ({ ...prev, up: true }));
         break;
       case "ArrowDown":
       case "s":
+      case "S":
         setKeys(prev => ({ ...prev, down: true }));
         break;
       case "ArrowLeft":
       case "a":
+      case "A":
         setKeys(prev => ({ ...prev, left: true }));
         break;
       case "ArrowRight":
       case "d":
+      case "D":
         setKeys(prev => ({ ...prev, right: true }));
         break;
     }
   };
   
-  const handleKeyUp = (e: KeyboardEvent) => {
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLCanvasElement> | KeyboardEvent) => {
     switch (e.key) {
       case "ArrowUp":
       case "w":
+      case "W":
         setKeys(prev => ({ ...prev, up: false }));
         break;
       case "ArrowDown":
       case "s":
+      case "S":
         setKeys(prev => ({ ...prev, down: false }));
         break;
       case "ArrowLeft":
       case "a":
+      case "A":
         setKeys(prev => ({ ...prev, left: false }));
         break;
       case "ArrowRight":
       case "d":
+      case "D":
         setKeys(prev => ({ ...prev, right: false }));
         break;
     }
@@ -386,6 +432,10 @@ export default function GameArea({ level, onGameOver }: GameAreaProps) {
           width={gameWidth}
           height={gameHeight}
           className="border border-cyberprimary rounded-lg"
+          tabIndex={0}
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
+          style={{ outline: "none" }}
         />
         
         {!isGameActive && (
@@ -399,9 +449,44 @@ export default function GameArea({ level, onGameOver }: GameAreaProps) {
         )}
       </div>
       
-      <div className="mt-4 text-gray-300 text-sm text-center">
-        <p>Controles: Usa las flechas o WASD para mover el personaje. Evita los obstáculos y llega al portal verde.</p>
-        <p className="mt-1">La dificultad aumentará con cada nivel que superes.</p>
+      <div className="mt-4 text-gray-300 text-sm">
+        <div className="bg-cyberdark p-3 rounded-md border border-cyberprimary mb-2">
+          <h3 className="text-cyberaccent font-bold mb-2 text-center">CONTROLES DEL JUEGO</h3>
+          <div className="flex flex-wrap justify-center gap-4 mb-2">
+            <div className="flex flex-col items-center">
+              <div className="bg-gray-800 w-10 h-10 flex items-center justify-center rounded-md border border-cyberaccent mb-1">
+                <span className="text-cyberaccent">W</span>
+              </div>
+              <span>Arriba</span>
+            </div>
+            <div className="flex space-x-2">
+              <div className="flex flex-col items-center">
+                <div className="bg-gray-800 w-10 h-10 flex items-center justify-center rounded-md border border-cyberaccent mb-1">
+                  <span className="text-cyberaccent">A</span>
+                </div>
+                <span>Izquierda</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="bg-gray-800 w-10 h-10 flex items-center justify-center rounded-md border border-cyberaccent mb-1">
+                  <span className="text-cyberaccent">S</span>
+                </div>
+                <span>Abajo</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="bg-gray-800 w-10 h-10 flex items-center justify-center rounded-md border border-cyberaccent mb-1">
+                  <span className="text-cyberaccent">D</span>
+                </div>
+                <span>Derecha</span>
+              </div>
+            </div>
+          </div>
+          <p className="text-center">También puedes usar las <span className="text-cyberaccent font-bold">flechas</span> del teclado</p>
+        </div>
+        <div className="bg-cyberdark p-3 rounded-md border border-purple-700">
+          <p className="text-center"><span className="text-cyberaccent font-bold">Objetivo:</span> Evita los obstáculos y llega al portal verde.</p>
+          <p className="text-center mt-1">La dificultad aumentará con cada nivel que superes.</p>
+          <p className="text-center mt-1 text-red-400 font-bold animate-pulse">¡HAGA CLIC EN EL JUEGO PARA COMENZAR!</p>
+        </div>
       </div>
     </motion.div>
   );
