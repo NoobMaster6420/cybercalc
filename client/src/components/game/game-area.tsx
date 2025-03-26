@@ -418,6 +418,23 @@ export default function GameArea({ level, onGameOver }: GameAreaProps) {
     return obstacles.some(obstacle => checkCollision(player, obstacle));
   };
   
+  // Función para dar foco al canvas al hacer clic
+  const focusCanvas = () => {
+    if (canvasRef.current) {
+      canvasRef.current.focus();
+      
+      // Si el juego está pausado, reanudarlo
+      if (!isGameActive) {
+        setIsGameActive(true);
+        requestRef.current = requestAnimationFrame(gameLoop);
+        toast({
+          title: "¡Juego activado!",
+          description: "Usa las flechas o WASD para mover el personaje",
+        });
+      }
+    }
+  };
+
   return (
     <motion.div
       ref={gameAreaRef}
@@ -431,19 +448,27 @@ export default function GameArea({ level, onGameOver }: GameAreaProps) {
           ref={canvasRef}
           width={gameWidth}
           height={gameHeight}
-          className="border border-cyberprimary rounded-lg"
+          className="border border-cyberprimary rounded-lg cursor-pointer hover:border-cyberaccent transition-colors duration-300"
           tabIndex={0}
-          onKeyDown={handleKeyDown}
-          onKeyUp={handleKeyUp}
+          onClick={focusCanvas}
+          onKeyDown={(e) => handleKeyDown(e as React.KeyboardEvent<HTMLCanvasElement>)}
+          onKeyUp={(e) => handleKeyUp(e as React.KeyboardEvent<HTMLCanvasElement>)}
           style={{ outline: "none" }}
         />
         
         {!isGameActive && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70">
-            <div className="text-center">
-              <h3 className="text-xl font-cyber font-bold text-cyberaccent mb-2">
+          <div 
+            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 cursor-pointer" 
+            onClick={focusCanvas}
+          >
+            <div className="text-center p-6 bg-cyberdark bg-opacity-90 border-2 border-cyberaccent rounded-lg transform transition-transform hover:scale-105">
+              <h3 className="text-xl font-cyber font-bold text-cyberaccent mb-3">
                 Juego Pausado
               </h3>
+              <p className="text-white mb-4">Haz clic para continuar</p>
+              <div className="mx-auto w-32 h-10 bg-cyberaccent bg-opacity-20 rounded-md border border-cyberaccent flex items-center justify-center animate-pulse">
+                <span className="text-cyberaccent font-bold">INICIAR</span>
+              </div>
             </div>
           </div>
         )}

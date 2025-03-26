@@ -11,9 +11,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle, Loader2, Skull, Trophy, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Latex } from "@/components/ui/latex";
-import GameArea from "@/components/game/game-area";
-import MathQuestionModal from "@/components/game/math-question-modal";
-import { generateMathQuestion } from "@/lib/game-utils";
+import GameArea from "../components/game/game-area";
+import MathQuestionModal from "../components/game/math-question-modal";
+import { generateMathQuestion } from "../lib/game-utils";
 
 export default function GamePage() {
   const [isPlaying, setIsPlaying] = useState(false);
