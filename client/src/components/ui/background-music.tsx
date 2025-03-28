@@ -14,11 +14,10 @@ export function BackgroundMusic() {
     audioRef.current.loop = true;
     audioRef.current.volume = 0.3;
 
-    const savedMuteState = localStorage.getItem('backgroundMusicMuted');
-    if (savedMuteState === 'false') {
-      audioRef.current.play().catch(console.error);
+    // Intentar reproducir automáticamente
+    audioRef.current.play().then(() => {
       setIsMuted(false);
-    }
+    }).catch(console.error);
 
     return () => {
       if (audioRef.current) {
