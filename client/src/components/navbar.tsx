@@ -67,8 +67,8 @@ export default function Navbar() {
               <Link href="/ranking">
                 <a className="border-transparent hover:border-cyberaccent text-white hover:text-cyberaccent px-3 py-2 font-medium hover:bg-opacity-10 hover:bg-cyberaccent rounded-md transition duration-150">Ranking</a>
               </Link>
-              <Link href="/juego-extremo">
-                <a className="border-2 border-red-500 text-red-400 hover:text-white px-4 py-2 font-bold bg-gradient-to-r from-red-900 to-purple-900 hover:from-red-700 hover:to-purple-700 rounded-md transition-all duration-300 shadow-lg shadow-red-700/50 hover:shadow-red-600/80 transform hover:scale-105 animate-pulse">¡JUEGO EXTREMO!</a>
+              <Link href="/juegos-historia">
+                <a className="border-2 border-blue-500 text-blue-400 hover:text-white px-4 py-2 font-bold bg-gradient-to-r from-blue-900 to-purple-900 hover:from-blue-700 hover:to-purple-700 rounded-md transition-all duration-300 shadow-lg shadow-blue-700/50 hover:shadow-blue-600/80 transform hover:scale-105 animate-pulse">JUEGOS DE HISTORIA</a>
               </Link>
             </div>
           </div>
@@ -129,8 +129,8 @@ export default function Navbar() {
           <Link href="/ranking">
             <a onClick={closeMenu} className="block px-3 py-2 rounded-md text-white font-medium hover:bg-cyberprimary hover:bg-opacity-20">Ranking</a>
           </Link>
-          <Link href="/juego-extremo">
-            <a onClick={closeMenu} className="block px-4 py-3 rounded-md text-red-400 font-bold bg-gradient-to-r from-red-900 to-purple-900 hover:from-red-700 hover:to-purple-700 border-2 border-red-500 hover:text-white shadow-lg shadow-red-700/50 hover:shadow-red-600/80 transform hover:scale-105 animate-pulse">¡JUEGO EXTREMO!</a>
+          <Link href="/juegos-historia">
+            <a onClick={closeMenu} className="block px-4 py-3 rounded-md text-blue-400 font-bold bg-gradient-to-r from-blue-900 to-purple-900 hover:from-blue-700 hover:to-purple-700 border-2 border-blue-500 hover:text-white shadow-lg shadow-blue-700/50 hover:shadow-blue-600/80 transform hover:scale-105 animate-pulse">JUEGOS DE HISTORIA</a>
           </Link>
         </div>
         

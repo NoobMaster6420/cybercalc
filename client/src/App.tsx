@@ -22,7 +22,7 @@ function Router() {
       <ProtectedRoute path="/quiz" component={QuizPage} />
       <ProtectedRoute path="/retos" component={ChallengesPage} />
       <ProtectedRoute path="/ranking" component={LeaderboardPage} />
-      <ProtectedRoute path="/juego-extremo" component={GamePage} />
+      <ProtectedRoute path="/juegos-historia" component={GamePage} />
       <Route component={NotFound} />
     </Switch>
   );
