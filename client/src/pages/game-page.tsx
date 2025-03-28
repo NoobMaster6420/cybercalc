@@ -93,9 +93,9 @@ const storyScenarios = [
         id: "practical-application",
         title: "Episodio 4: Aplicación en Maniobras Evasivas",
         content: "¡Alerta, Capitán! Hemos entrado en un campo de asteroides y necesitamos ejecutar maniobras evasivas. En esta situación, aplicaremos todo lo que hemos aprendido sobre derivadas para calcular la trayectoria óptima.\n\nLa computadora de navegación resuelve un problema de optimización donde busca minimizar el riesgo de colisión mientras mantiene el consumo de combustible dentro de límites aceptables. Las derivadas nos permiten encontrar los puntos críticos de estas funciones y determinar la maniobra más eficiente.",
-        example: "Función de riesgo: R(v) = v^2 - 10v + 30, donde v es la velocidad",
-        solution: "R'(v) = 2v - 10\nPara R'(v) = 0: 2v - 10 = 0 \\Rightarrow v = 5\nComo R''(v) = 2 > 0, v = 5 corresponde a un mínimo.",
-        explanation: "Para minimizar el riesgo, calculamos la derivada de la función de riesgo y encontramos donde es igual a cero. Luego verificamos que la segunda derivada sea positiva para confirmar que es un mínimo.",
+        example: "R(v) = v^2 - 10v + 30",
+        solution: "R'(v) = 2v - 10\nPara R'(v) = 0: 2v - 10 = 0\nv = 5\nR''(v) = 2 > 0, es un mínimo",
+        explanation: "Para minimizar el riesgo, calculamos la derivada de la función e igualamos a cero. Al verificar que la segunda derivada es positiva, confirmamos que es un mínimo.",
         questionPrompt: "¡Campo de asteroides detectado! Calcula la velocidad óptima para minimizar el riesgo:",
         question: {
           id: 8,
@@ -108,7 +108,7 @@ const storyScenarios = [
             { id: "d", formula: "v = 10 \\text{ km/s}" }
           ],
           correctOptionId: "b",
-          explanation: "Calculamos la derivada de la función de riesgo:\nR'(v) = 2v - 12\nIgualamos a cero: 2v - 12 = 0 ⟹ v = 6\nComo R''(v) = 2 > 0, tenemos un mínimo en v = 6 km/s."
+          explanation: "Calculamos la derivada: R'(v) = 2v - 12\nIgualamos a cero: 2v - 12 = 0\nDespejamos: v = 6\nComo R''(v) = 2 > 0, tenemos un mínimo en v = 6 km/s."
         }
       }
     ]
@@ -197,9 +197,9 @@ const storyScenarios = [
         id: "functions-intro",
         title: "Episodio 1: Bienvenido a Mathópolis",
         content: "Detective, bienvenido a Mathópolis, la ciudad donde cada edificio y estructura representa una función matemática. Como investigador especial, tu misión es resolver misterios matemáticos que están afectando a la ciudad.\n\nPara empezar, debes entender que cada función tiene su dominio (el terreno sobre el que está construida) y su rango (la altura a la que puede llegar). Algunas funciones son continuas, con estructuras fluidas, mientras que otras presentan discontinuidades y saltos abruptos.",
-        example: "Edificio Polinómico: f(x) = x^3 - 3x^2 + 2x",
-        solution: "Dominio: Todos los números reales (ℝ)\nCeros: f(x) = 0 cuando x = 0, x = 1, y x = 2\nPuntos críticos: f'(x) = 3x^2 - 6x + 2 = 0 cuando x = (6 ± √12)/6 ≈ 0.42 y 1.58",
-        explanation: "Las funciones polinómicas tienen como dominio todos los números reales. Sus ceros (raíces) son los valores donde la función es igual a cero. Los puntos críticos, donde la derivada es cero, representan máximos, mínimos o puntos de inflexión.",
+        example: "f(x) = x^3 - 3x^2 + 2x",
+        solution: "Dominio: ℝ (todos los reales)\nCeros: x = 0, x = 1, x = 2\nPuntos críticos: x ≈ 0.42 y x ≈ 1.58",
+        explanation: "Las funciones polinómicas tienen como dominio todos los números reales. Sus ceros son los valores donde la función es igual a cero. Los puntos críticos representan máximos, mínimos o puntos de inflexión.",
         questionPrompt: "El edificio principal de la ciudad está inestable. ¡Determina sus puntos críticos!",
         question: {
           id: 17,
@@ -219,9 +219,9 @@ const storyScenarios = [
         id: "continuity-investigation",
         title: "Episodio 2: El Misterio de la Continuidad",
         content: "Detective, tenemos un problema en el Distrito Racional de Mathópolis. Algunas estructuras muestran discontinuidades que provocan inestabilidad. Tu misión es analizar estas funciones para determinar dónde son continuas y dónde presentan problemas.\n\nPara que una función sea continua en un punto, debe cumplir tres condiciones: la función debe estar definida en ese punto, el límite debe existir en ese punto, y el valor de la función debe coincidir con el límite. Las discontinuidades pueden ser removibles (agujeros) o no removibles (saltos o asíntotas).",
-        example: "Estructura Racional: g(x) = \\frac{x^2 - 4}{x - 2}",
-        solution: "Factorizando: g(x) = \\frac{(x-2)(x+2)}{x-2} = x+2 para x \\neq 2\nLa función tiene una discontinuidad removible en x = 2. Si definimos g(2) = 4, la función se vuelve continua.",
-        explanation: "Esta función tiene una forma indeterminada 0/0 en x = 2, pero puede simplificarse a x+2 para x ≠ 2. La discontinuidad en x = 2 es removible porque podemos definir un valor que haga la función continua.",
+        example: "g(x) = \\frac{x^2 - 4}{x - 2}",
+        solution: "g(x) = \\frac{(x-2)(x+2)}{x-2} = x+2 para x ≠ 2\nEn x = 2 hay una discontinuidad removible\nSi g(2) = 4, la función se vuelve continua",
+        explanation: "Esta función tiene una indeterminación 0/0 en x = 2, pero simplifica a x+2 para x ≠ 2. La discontinuidad es removible porque podemos definir un valor que la haga continua.",
         questionPrompt: "Un edificio en el Distrito Racional muestra inestabilidad. ¡Analiza su continuidad!",
         question: {
           id: 18,
@@ -241,9 +241,9 @@ const storyScenarios = [
         id: "extreme-values",
         title: "Episodio 3: El Caso de los Valores Extremos",
         content: "Detective, se ha reportado un problema en el Distrito de Optimización. Necesitamos encontrar los valores extremos de varias estructuras para garantizar su estabilidad y eficiencia.\n\nLos valores extremos son los máximos y mínimos de una función. Para encontrarlos, primero hallamos los puntos críticos (donde la derivada es cero) y luego determinamos si son máximos (segunda derivada negativa) o mínimos (segunda derivada positiva). También debemos verificar los extremos del dominio.",
-        example: "Torre de Optimización: f(x) = x^3 - 3x^2 - 9x + 5 en [-2, 4]",
-        solution: "f'(x) = 3x^2 - 6x - 9\nf'(x) = 0 cuando x = -1 y x = 3\nf''(-1) = 6(-1) - 6 = -12 < 0 (máximo local)\nf''(3) = 6(3) - 6 = 12 > 0 (mínimo local)\nValores en los extremos: f(-2) = -15, f(4) = 7\nMáximo global: f(-1) = 10, Mínimo global: f(-2) = -15",
-        explanation: "Para encontrar los valores extremos, calculamos los puntos críticos y evaluamos la función en esos puntos y en los extremos del dominio. Luego comparamos todos estos valores para determinar el máximo y mínimo global.",
+        example: "f(x) = x^3 - 3x^2 - 9x + 5 en [-2, 4]",
+        solution: "f'(x) = 3x^2 - 6x - 9\nf'(x) = 0 en x = -1 y x = 3\nf''(-1) = -12 < 0 (máximo local)\nf''(3) = 12 > 0 (mínimo local)\nMáximo global: f(-1) = 10\nMínimo global: f(-2) = -15",
+        explanation: "Para encontrar valores extremos, calculamos puntos críticos y evaluamos la función en esos puntos y en los extremos del dominio. Luego comparamos para determinar máximos y mínimos globales.",
         questionPrompt: "El Rascacielos Cuadrático necesita una evaluación de estabilidad. ¡Encuentra sus valores extremos!",
         question: {
           id: 19,
@@ -256,7 +256,7 @@ const storyScenarios = [
             { id: "d", formula: "\\text{Mínimo: } -5 \\text{ en } x = 2, \\text{ Máximo: } 23 \\text{ en } x = 5" }
           ],
           correctOptionId: "b",
-          explanation: "Calculamos la derivada: f'(x) = 4x - 8\nIgualamos a cero: 4x - 8 = 0 ⟹ x = 2\nVerificamos: f''(x) = 4 > 0, por lo que x = 2 es un mínimo.\nEvaluamos en los puntos críticos y extremos:\nf(0) = 3\nf(2) = 2(4) - 8(2) + 3 = 8 - 16 + 3 = -5\nf(5) = 2(25) - 8(5) + 3 = 50 - 40 + 3 = 13\nPor lo tanto, el mínimo es -5 en x = 2 y el máximo es 13 en x = 5."
+          explanation: "Calculamos la derivada: f'(x) = 4x - 8\nIgualamos a cero: 4x - 8 = 0 ⟹ x = 2\nVerificamos: f''(x) = 4 > 0, por lo que x = 2 es un mínimo.\nEvaluamos en los puntos críticos y extremos:\nf(0) = 3\nf(2) = -5\nf(5) = 13\nPor lo tanto, el mínimo es -5 en x = 2 y el máximo es 13 en x = 5."
         }
       }
     ]
