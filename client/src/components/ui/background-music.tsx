@@ -1,32 +1,48 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from './button';
 import { Volume2, VolumeX } from 'lucide-react';
-import ReactAudioPlayer from 'react-audio-player';
 
 const BACKGROUND_MUSIC_URL = 'https://cdn.pixabay.com/download/audio/2022/01/28/audio_2438267e0e.mp3';
 
 export function BackgroundMusic() {
   const [isMuted, setIsMuted] = useState(true);
-  const [volume, setVolume] = useState(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
+    audioRef.current = new Audio(BACKGROUND_MUSIC_URL);
+    audioRef.current.loop = true;
+    audioRef.current.volume = 0.3;
+
     const savedMuteState = localStorage.getItem('backgroundMusicMuted');
-    if (savedMuteState !== null) {
-      const shouldBeMuted = savedMuteState === 'true';
-      setIsMuted(shouldBeMuted);
-      setVolume(shouldBeMuted ? 0 : 0.3);
+    if (savedMuteState === 'false') {
+      audioRef.current.play().catch(console.error);
+      setIsMuted(false);
     }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('backgroundMusicMuted', isMuted.toString());
-  }, [isMuted]);
+  const toggleMute = async () => {
+    if (!audioRef.current) return;
 
-  const toggleMute = () => {
-    const newMuteState = !isMuted;
-    setIsMuted(newMuteState);
-    setVolume(newMuteState ? 0 : 0.3);
+    try {
+      if (isMuted) {
+        await audioRef.current.play();
+        setIsMuted(false);
+      } else {
+        audioRef.current.pause();
+        setIsMuted(true);
+      }
+      localStorage.setItem('backgroundMusicMuted', (!isMuted).toString());
+    } catch (error) {
+      console.error('Error al reproducir audio:', error);
+    }
   };
 
   return (
@@ -42,14 +58,6 @@ export function BackgroundMusic() {
           <Volume2 className="h-5 w-5" />
         }
       </Button>
-      
-      <audio
-        src={BACKGROUND_MUSIC_URL}
-        autoPlay
-        loop
-        id="background-music"
-        style={{ display: 'none' }}
-      />
     </div>
   );
 }
