@@ -12,6 +12,7 @@ import LeaderboardPage from "@/pages/leaderboard-page";
 import GamePage from "@/pages/game-page";
 import { ProtectedRoute } from "./lib/protected-route";
 import { AuthProvider } from "@/hooks/use-auth";
+import { BackgroundMusic } from "@/components/ui/background-music";
 
 function Router() {
   return (
@@ -34,6 +35,7 @@ function App() {
       <AuthProvider>
         <Router />
         <Toaster />
+        <BackgroundMusic />
       </AuthProvider>
     </QueryClientProvider>
   );

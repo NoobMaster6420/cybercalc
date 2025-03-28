@@ -6,6 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 import { Heart, Star, Menu, X } from 'lucide-react';
 import { UserProgress } from '@shared/schema';
 import { queryClient } from '@/lib/queryClient';
+import { ThemeToggle } from './ui/theme-toggle';
+import { BackgroundMusic } from './ui/background-music';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,26 +75,33 @@ export default function Navbar() {
             </div>
           </div>
           
-          {user && (
-            <div className="hidden sm:ml-6 sm:flex sm:items-center">
-              <div id="user-stats" className="flex items-center mr-4 px-3 py-2 bg-cyberdark border border-cyberprimary rounded-lg shadow-neon-blue">
-                <div className="flex items-center mr-4 px-2 py-1 bg-cyberbg rounded-md">
-                  <Heart className="h-5 w-5 text-red-500 mr-1" fill="#ef4444" />
-                  <span id="lives-count" className="font-medium text-white">{user?.lives !== undefined ? user.lives : 3}</span>
-                </div>
-                <div className="flex items-center px-2 py-1 bg-cyberbg rounded-md">
-                  <Star className="h-5 w-5 text-yellow-500 mr-1" fill="#eab308" />
-                  <span id="points-count" className="font-medium text-white">{user?.points !== undefined ? user.points : 0}</span>
-                </div>
-              </div>
-              <Button 
-                onClick={handleLogout} 
-                className="cyber-btn bg-cyberprimary hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md transition duration-300"
-              >
-                Cerrar Sesión
-              </Button>
+          <div className="hidden sm:ml-6 sm:flex sm:items-center gap-2">
+            {/* Controles de tema y sonido */}
+            <div className="flex items-center gap-2 mr-2">
+              <ThemeToggle />
             </div>
-          )}
+            
+            {user && (
+              <>
+                <div id="user-stats" className="flex items-center mr-4 px-3 py-2 bg-cyberdark border border-cyberprimary rounded-lg shadow-neon-blue">
+                  <div className="flex items-center mr-4 px-2 py-1 bg-cyberbg rounded-md">
+                    <Heart className="h-5 w-5 text-red-500 mr-1" fill="#ef4444" />
+                    <span id="lives-count" className="font-medium text-white">{user?.lives !== undefined ? user.lives : 3}</span>
+                  </div>
+                  <div className="flex items-center px-2 py-1 bg-cyberbg rounded-md">
+                    <Star className="h-5 w-5 text-yellow-500 mr-1" fill="#eab308" />
+                    <span id="points-count" className="font-medium text-white">{user?.points !== undefined ? user.points : 0}</span>
+                  </div>
+                </div>
+                <Button 
+                  onClick={handleLogout} 
+                  className="cyber-btn bg-cyberprimary hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md transition duration-300"
+                >
+                  Cerrar Sesión
+                </Button>
+              </>
+            )}
+          </div>
           
           <div className="flex items-center sm:hidden">
             <button 
@@ -132,6 +141,12 @@ export default function Navbar() {
           <Link href="/juegos-historia">
             <a onClick={closeMenu} className="block px-4 py-3 rounded-md text-blue-400 font-bold bg-gradient-to-r from-blue-900 to-purple-900 hover:from-blue-700 hover:to-purple-700 border-2 border-blue-500 hover:text-white shadow-lg shadow-blue-700/50 hover:shadow-blue-600/80 transform hover:scale-105 animate-pulse">JUEGOS DE HISTORIA</a>
           </Link>
+          
+          {/* Controles de tema en móvil */}
+          <div className="mt-3 flex items-center justify-start gap-2 px-3 py-2">
+            <ThemeToggle />
+            <span className="text-white text-sm ml-2">Cambiar tema</span>
+          </div>
         </div>
         
         {user && (
