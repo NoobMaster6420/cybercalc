@@ -8,7 +8,7 @@ import { UserProgress, QuizQuestion, ChallengeQuestion } from "@shared/schema";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, Loader2, Skull, Trophy, Clock, BookOpen, Rocket, ChevronRight, PenTool } from "lucide-react";
+import { AlertCircle, Loader2, Skull, Trophy, Clock, BookOpen, Rocket, ChevronRight, PenTool, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Latex } from "@/components/ui/latex";
 import MathQuestionModal from "../components/game/math-question-modal";
@@ -421,6 +421,36 @@ export default function GamePage() {
                 </>
               )}
             </div>
+
+            {/* Botón para explicar límites con MobbyT */}
+            {selectedScenario === null && (
+              <div className="mb-6">
+                <a 
+                  href="https://mobbyt.com/videojuego/educativo/play.php?Id=155434" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full block"
+                >
+                  <motion.div
+                    className="bg-gradient-to-r from-blue-800 to-purple-800 p-6 rounded-lg cyber-border border-blue-500 hover:shadow-lg transition-all duration-300 flex items-center justify-between"
+                    whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.5)" }}
+                  >
+                    <div className="flex items-center">
+                      <div className="text-4xl mr-4">🎮</div>
+                      <div>
+                        <h2 className="text-2xl font-cyber font-bold text-blue-200">Juego Interactivo: Aprende Límites</h2>
+                        <p className="text-gray-300 mt-1">
+                          Explora este juego educativo para entender mejor el concepto de límites de manera interactiva
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center cyber-btn bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-md text-white">
+                      Jugar Ahora <ExternalLink className="ml-2 h-4 w-4" />
+                    </div>
+                  </motion.div>
+                </a>
+              </div>
+            )}
 
             {/* Lista de escenarios */}
             {selectedScenario === null && (
