@@ -10,16 +10,26 @@ export function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    audioRef.current = new Audio(BACKGROUND_MUSIC_URL);
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.3;
+    const audio = new Audio(BACKGROUND_MUSIC_URL);
+    audio.loop = true;
+    audio.volume = 0.3;
+    audioRef.current = audio;
 
-    // Intentar reproducir automáticamente
-    audioRef.current.play().then(() => {
-      setIsMuted(false);
-    }).catch(console.error);
+    const startPlayback = () => {
+      if (audioRef.current) {
+        audioRef.current.play()
+          .then(() => {
+            setIsMuted(false);
+            document.removeEventListener('click', startPlayback);
+          })
+          .catch(console.error);
+      }
+    };
+
+    document.addEventListener('click', startPlayback);
 
     return () => {
+      document.removeEventListener('click', startPlayback);
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
@@ -27,20 +37,16 @@ export function BackgroundMusic() {
     };
   }, []);
 
-  const toggleMute = async () => {
+  const toggleMute = () => {
     if (!audioRef.current) return;
 
-    try {
-      if (isMuted) {
-        await audioRef.current.play();
-        setIsMuted(false);
-      } else {
-        audioRef.current.pause();
-        setIsMuted(true);
-      }
-      localStorage.setItem('backgroundMusicMuted', (!isMuted).toString());
-    } catch (error) {
-      console.error('Error al reproducir audio:', error);
+    if (isMuted) {
+      audioRef.current.play()
+        .then(() => setIsMuted(false))
+        .catch(console.error);
+    } else {
+      audioRef.current.pause();
+      setIsMuted(true);
     }
   };
 
