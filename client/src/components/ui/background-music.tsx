@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './button';
 import { Volume2, VolumeX } from 'lucide-react';
 
@@ -8,42 +8,59 @@ const BACKGROUND_MUSIC_URL = 'https://cdn.pixabay.com/download/audio/2022/01/28/
 
 export function BackgroundMusic() {
   const [isMuted, setIsMuted] = useState(true);
-
-  const toggleMute = () => {
-    // Obtener el elemento de audio (o crearlo si no existe)
-    let audioElement = document.getElementById('background-music') as HTMLAudioElement;
+  
+  // Crear el elemento de audio una vez al cargar el componente
+  useEffect(() => {
+    const audioExists = document.getElementById('background-music') as HTMLAudioElement;
     
-    if (!audioElement) {
-      // Crear el elemento si no existe
-      audioElement = document.createElement('audio');
-      audioElement.id = 'background-music';
-      audioElement.src = BACKGROUND_MUSIC_URL;
-      audioElement.loop = true;
-      audioElement.style.display = 'none';
-      audioElement.volume = 0.3;
-      document.body.appendChild(audioElement);
+    if (!audioExists) {
+      // Agregamos un elemento audio visible para solucionar
+      // el problema de reproducción automática
+      const audioTag = document.createElement('audio');
+      audioTag.id = 'background-music';
+      audioTag.src = BACKGROUND_MUSIC_URL;
+      audioTag.loop = true;
+      audioTag.controls = true; // Mostrar controles para interacción inicial
+      audioTag.style.position = 'absolute';
+      audioTag.style.bottom = '80px';
+      audioTag.style.right = '20px';
+      audioTag.style.width = '250px';
+      audioTag.style.zIndex = '50';
+      audioTag.style.opacity = '0.8';
+      audioTag.volume = 0.3;
+      
+      document.body.appendChild(audioTag);
+      
+      // Agregar un listener para ocultar los controles después de la primera reproducción
+      audioTag.addEventListener('play', () => {
+        setIsMuted(false);
+      });
+      
+      audioTag.addEventListener('pause', () => {
+        setIsMuted(true);
+      });
     }
     
-    // Alternar el estado
-    if (isMuted) {
-      // Activar el audio
-      const playPromise = audioElement.play();
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            console.log("Reproduciendo música");
-            setIsMuted(false);
-          })
-          .catch(err => {
-            console.error("Error al reproducir:", err);
-            alert("Por favor, intenta hacer clic de nuevo para activar la música. Los navegadores requieren interacción del usuario para reproducir audio automáticamente.");
-          });
+    // Limpieza
+    return () => {
+      const audioElement = document.getElementById('background-music');
+      if (audioElement) {
+        audioElement.remove();
       }
+    };
+  }, []);
+  
+  const toggleMute = () => {
+    const audioElement = document.getElementById('background-music') as HTMLAudioElement;
+    if (!audioElement) return;
+    
+    if (isMuted) {
+      audioElement.play()
+        .then(() => setIsMuted(false))
+        .catch(err => console.error("Error al reproducir:", err));
     } else {
-      // Desactivar el audio
       audioElement.pause();
       setIsMuted(true);
-      console.log("Música pausada");
     }
   };
 
