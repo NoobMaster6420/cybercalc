@@ -1,59 +1,49 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Button } from './button';
 import { Volume2, VolumeX } from 'lucide-react';
 
-// URL de música de fondo ambiental para aprendizaje
 const BACKGROUND_MUSIC_URL = 'https://cdn.pixabay.com/download/audio/2022/01/28/audio_2438267e0e.mp3';
 
 export function BackgroundMusic() {
   const [isMuted, setIsMuted] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   
-  // Inicializar el elemento de audio
   useEffect(() => {
-    // Crear un elemento de audio
     const audioElement = new Audio(BACKGROUND_MUSIC_URL);
     audioElement.loop = true;
-    audioElement.volume = 0;
     audioRef.current = audioElement;
     
-    // Cargar el estado de silencio desde localStorage
-    const savedMuteState = localStorage.getItem('backgroundMusicMuted');
-    if (savedMuteState) {
-      const shouldBeMuted = savedMuteState === 'true';
-      setIsMuted(shouldBeMuted);
-      if (!shouldBeMuted) {
-        audioElement.volume = 0.3;
-        audioElement.play().catch(e => console.error('Error al reproducir audio:', e));
+    const playAudio = () => {
+      if (audioRef.current && !isMuted) {
+        audioRef.current.volume = 0.3;
+        audioRef.current.play().catch(e => console.error('Error al reproducir audio:', e));
       }
-    }
+    };
+
+    // Intentar reproducir cuando el usuario interactúe
+    document.addEventListener('click', playAudio, { once: true });
     
-    // Limpiar al desmontar
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
       }
+      document.removeEventListener('click', playAudio);
     };
   }, []);
   
-  // Guardar el estado de silencio en localStorage y controlar reproducción
-  useEffect(() => {
-    localStorage.setItem('backgroundMusicMuted', isMuted.toString());
-    
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
     if (audioRef.current) {
-      if (isMuted) {
-        audioRef.current.volume = 0;
+      if (!isMuted) {
         audioRef.current.pause();
+        audioRef.current.volume = 0;
       } else {
         audioRef.current.volume = 0.3;
         audioRef.current.play().catch(e => console.error('Error al reproducir audio:', e));
       }
     }
-  }, [isMuted]);
-  
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
   };
   
   return (

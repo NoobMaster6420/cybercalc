@@ -6,7 +6,6 @@ import { useQuery } from '@tanstack/react-query';
 import { Heart, Star, Menu, X } from 'lucide-react';
 import { UserProgress } from '@shared/schema';
 import { queryClient } from '@/lib/queryClient';
-import { ThemeToggle } from './ui/theme-toggle';
 import { BackgroundMusic } from './ui/background-music';
 
 export default function Navbar() {
