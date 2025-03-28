@@ -151,6 +151,18 @@
   box-shadow: 0 0 5px hsl(var(--secondary)), 0 0 20px hsl(var(--secondary) / 0.5);
 }
 
+/* Efecto de brillo para el botón de música */
+.glow-effect {
+  position: relative;
+  overflow: visible;
+  transition: all 0.3s ease;
+}
+
+.glow-effect:hover {
+  box-shadow: 0 0 8px hsl(var(--accent)), 0 0 12px hsl(var(--accent));
+  transform: translateY(-2px);
+}
+
 /* Set background and text colors */
 .bg-cyberdark {
   background-color: hsl(var(--background));

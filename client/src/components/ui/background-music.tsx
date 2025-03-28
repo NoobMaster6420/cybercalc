@@ -1,101 +1,77 @@
 
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button } from './button';
 import { Volume2, VolumeX } from 'lucide-react';
 
-// URL de música de fondo ambiental para aprendizaje
-const BACKGROUND_MUSIC_URL = 'https://cdn.pixabay.com/download/audio/2022/01/28/audio_2438267e0e.mp3';
+// URL de música de fondo más liviana
+const BACKGROUND_MUSIC_URL = 'https://cdn.pixabay.com/download/audio/2022/03/10/audio_8cb749d484.mp3';
 
 export function BackgroundMusic() {
-  const [isMuted, setIsMuted] = useState(false);
-  const [audioCreated, setAudioCreated] = useState(false);
-  
-  // Crear el elemento de audio una vez al cargar el componente
-  useEffect(() => {
-    if (audioCreated) return;
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // Función simple para reproducir/detener música
+  const toggleMusic = () => {
+    // Obtener el elemento audio o crearlo si no existe
+    let audio = document.getElementById('cybercalc-audio') as HTMLAudioElement;
     
-    // Crear elemento de audio oculto
-    const audioElement = document.createElement('audio');
-    audioElement.id = 'background-music';
-    audioElement.src = BACKGROUND_MUSIC_URL;
-    audioElement.loop = true;
-    audioElement.style.display = 'none';
-    audioElement.volume = 0.3;
-    document.body.appendChild(audioElement);
-    
-    setAudioCreated(true);
-    
-    // Intentar reproducir automáticamente cuando el usuario interactúe con la página
-    const tryAutoplay = () => {
-      const audio = document.getElementById('background-music') as HTMLAudioElement;
-      if (audio) {
-        audio.play()
-          .then(() => {
-            setIsMuted(false);
-            // Remover los event listeners una vez que se reproduce
-            document.removeEventListener('click', tryAutoplay);
-            document.removeEventListener('keydown', tryAutoplay);
-            document.removeEventListener('touchstart', tryAutoplay);
-            document.removeEventListener('mousemove', tryAutoplay);
-          })
-          .catch(err => {
-            console.error("No se pudo reproducir automáticamente:", err);
-          });
-      }
-    };
-    
-    // Agregar event listeners para detectar interacción del usuario
-    document.addEventListener('click', tryAutoplay);
-    document.addEventListener('keydown', tryAutoplay);
-    document.addEventListener('touchstart', tryAutoplay);
-    document.addEventListener('mousemove', tryAutoplay);
-    
-    // Limpiar al desmontar
-    return () => {
-      const audio = document.getElementById('background-music');
-      if (audio) {
-        document.body.removeChild(audio);
-      }
+    if (!audio) {
+      // Si no existe, crear un nuevo elemento de audio
+      audio = new Audio(BACKGROUND_MUSIC_URL);
+      audio.id = 'cybercalc-audio';
+      audio.loop = true;
+      audio.volume = 0.5;
       
-      document.removeEventListener('click', tryAutoplay);
-      document.removeEventListener('keydown', tryAutoplay);
-      document.removeEventListener('touchstart', tryAutoplay);
-      document.removeEventListener('mousemove', tryAutoplay);
-    };
-  }, [audioCreated]);
-  
-  // Función para alternar entre silenciar/reproducir
-  const toggleMute = () => {
-    const audioElement = document.getElementById('background-music') as HTMLAudioElement;
-    if (!audioElement) return;
+      // Agregar el evento de finalización para actualizar el estado
+      audio.onended = () => setIsPlaying(false);
+      
+      // Guardar el elemento en el DOM
+      document.body.appendChild(audio);
+    }
     
-    if (isMuted) {
-      audioElement.play()
-        .then(() => {
-          setIsMuted(false);
-        })
-        .catch(err => {
-          console.error("Error al reproducir:", err);
-        });
+    if (isPlaying) {
+      // Si está reproduciendo, pausar
+      audio.pause();
+      setIsPlaying(false);
     } else {
-      audioElement.pause();
-      setIsMuted(true);
+      // Si está pausado, reproducir
+      try {
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setIsPlaying(true);
+              console.log('Música iniciada correctamente');
+            })
+            .catch(error => {
+              console.error('Error al reproducir audio:', error);
+              setIsPlaying(false);
+            });
+        }
+      } catch (e) {
+        console.error('Error general al intentar reproducir:', e);
+      }
     }
   };
   
   return (
     <div className="fixed bottom-4 right-4 z-50">
       <Button 
-        onClick={toggleMute}
+        onClick={toggleMusic}
         size="icon"
         variant="outline"
-        className="bg-cyberdark border-cyberprimary hover:bg-cyberaccent"
-        title={isMuted ? "Activar música" : "Silenciar música"}
+        className="bg-cyberdark border-cyberprimary hover:bg-cyberaccent flex items-center justify-center relative glow-effect"
+        title={isPlaying ? "Silenciar música" : "Activar música"}
       >
-        {isMuted ? 
-          <VolumeX className="h-5 w-5" /> : 
-          <Volume2 className="h-5 w-5" />
+        {isPlaying ? 
+          <Volume2 className="h-5 w-5 text-blue-400" /> : 
+          <VolumeX className="h-5 w-5 text-gray-400" />
         }
+        {isPlaying && (
+          <span className="absolute -top-1 -right-1 flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+          </span>
+        )}
       </Button>
     </div>
   );
