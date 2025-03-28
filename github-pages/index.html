@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberCalc - Aprende Cálculo</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+</head>
+<body class="dark-theme">
+  <header>
+    <nav class="navbar">
+      <div class="logo-container">
+        <h1>CyberCalc</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#" id="nav-home" class="active">Inicio</a></li>
+        <li><a href="#" id="nav-teoria">Teoría</a></li>
+        <li><a href="#" id="nav-quiz">Quiz</a></li>
+        <li><a href="#" id="nav-retos">Retos</a></li>
+        <li><a href="#" id="nav-juegos-historia">Juegos de Historia</a></li>
+        <li><a href="#" id="nav-ranking">Ranking</a></li>
+      </ul>
+      <div class="user-section">
+        <span id="user-points">0 puntos</span>
+        <span id="user-lives">3 vidas</span>
+        <button id="theme-toggle">Tema</button>
+        <button id="logout-btn">Salir</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sección de Login/Registro -->
+    <section id="auth-page" class="page">
+      <div class="auth-container">
+        <div class="auth-form-container">
+          <h2 class="auth-title">Iniciar Sesión</h2>
+          <form id="login-form" class="auth-form">
+            <div class="form-field">
+              <label for="login-username">Nombre de usuario</label>
+              <input type="text" id="login-username" required>
+            </div>
+            <div class="form-field">
+              <label for="login-password">Contraseña</label>
+              <input type="password" id="login-password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+          </form>
+          <p>¿No tienes una cuenta? <a href="#" id="switch-to-register">Regístrate</a></p>
+        </div>
+
+        <div class="auth-form-container" style="display:none">
+          <h2 class="auth-title">Registrarse</h2>
+          <form id="register-form" class="auth-form">
+            <div class="form-field">
+              <label for="register-username">Nombre de usuario</label>
+              <input type="text" id="register-username" required>
+            </div>
+            <div class="form-field">
+              <label for="register-password">Contraseña</label>
+              <input type="password" id="register-password" required>
+            </div>
+            <div class="form-field">
+              <label for="register-confirm-password">Confirmar Contraseña</label>
+              <input type="password" id="register-confirm-password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+          </form>
+          <p>¿Ya tienes una cuenta? <a href="#" id="switch-to-login">Inicia Sesión</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Página de Inicio -->
+    <section id="home-page" class="page">
+      <div class="welcome-container">
+        <h2>Bienvenido a CyberCalc</h2>
+        <p>Explora y aprende cálculo diferencial en un entorno interactivo con estilo cyberpunk.</p>
+        
+        <div class="feature-cards">
+          <div class="feature-card">
+            <h3>Teoría</h3>
+            <p>Aprende los conceptos fundamentales del cálculo con explicaciones claras.</p>
+            <button class="btn btn-primary" data-navigate="teoria">Explorar</button>
+          </div>
+          
+          <div class="feature-card">
+            <h3>Quiz</h3>
+            <p>Pon a prueba tus conocimientos con preguntas de diferentes niveles.</p>
+            <button class="btn btn-primary" data-navigate="quiz">Empezar</button>
+          </div>
+          
+          <div class="feature-card">
+            <h3>Retos</h3>
+            <p>Desafíate con problemas complejos y gana puntos.</p>
+            <button class="btn btn-primary" data-navigate="retos">Desafiar</button>
+          </div>
+          
+          <div class="feature-card">
+            <h3>Juegos de Historia</h3>
+            <p>Aprende a través de historias interactivas sobre conceptos matemáticos.</p>
+            <button class="btn btn-primary" data-navigate="juegos-historia">Jugar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Página de Teoría -->
+    <section id="teoria-page" class="page">
+      <h2>Fundamentos de Cálculo</h2>
+      <div class="theory-container">
+        <div class="theory-section">
+          <h3>Límites</h3>
+          <p>Un límite es el valor al que tiende una función cuando la variable independiente se aproxima a cierto valor.</p>
+          <div class="math-formula">
+            lim_{x \to a} f(x) = L
+          </div>
+          <p>Donde L es el límite de f(x) cuando x tiende a a.</p>
+        </div>
+        
+        <div class="theory-section">
+          <h3>Derivadas</h3>
+          <p>La derivada de una función representa la tasa de cambio instantánea de la función con respecto a su variable.</p>
+          <div class="math-formula">
+            f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+          </div>
+          <p>Esta es la definición formal de la derivada como un límite.</p>
+        </div>
+        
+        <div class="theory-section">
+          <h3>Reglas de Derivación</h3>
+          <ul class="derivation-rules">
+            <li>
+              <span>Regla de la constante:</span>
+              <div class="math-formula">
+                \frac{d}{dx}(c) = 0
+              </div>
+            </li>
+            <li>
+              <span>Regla de la potencia:</span>
+              <div class="math-formula">
+                \frac{d}{dx}(x^n) = nx^{n-1}
+              </div>
+            </li>
+            <li>
+              <span>Regla del producto:</span>
+              <div class="math-formula">
+                \frac{d}{dx}[f(x) \cdot g(x)] = f'(x) \cdot g(x) + f(x) \cdot g'(x)
+              </div>
+            </li>
+            <li>
+              <span>Regla del cociente:</span>
+              <div class="math-formula">
+                \frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{[g(x)]^2}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Página de Quiz -->
+    <section id="quiz-page" class="page">
+      <div class="quiz-container">
+        <h2>Quiz de Cálculo</h2>
+        
+        <div id="difficulty-selector" class="difficulty-selector">
+          <h3>Selecciona la dificultad</h3>
+          <div class="difficulty-buttons">
+            <button id="easy-btn" class="btn btn-primary">Fácil</button>
+            <button id="medium-btn" class="btn btn-primary">Medio</button>
+            <button id="hard-btn" class="btn btn-primary">Difícil</button>
+          </div>
+        </div>
+        
+        <div id="quiz-questions" class="quiz-questions" style="display:none">
+          <div class="question-header">
+            <span id="question-number">Pregunta 1/5</span>
+          </div>
+          
+          <div id="question-card" class="question-card">
+            <div id="question-text"></div>
+            <div id="formula-display" class="formula-display"></div>
+            
+            <div id="options-container" class="options-container">
+              <!-- Las opciones se generarán dinámicamente -->
+            </div>
+            
+            <button id="verify-answer-btn" class="btn btn-primary">Verificar Respuesta</button>
+          </div>
+          
+          <div id="question-result" class="question-result" style="display:none">
+            <div id="result-status" class="result-status"></div>
+            <div id="correct-answer" class="correct-answer"></div>
+            <div id="explanation" class="explanation"></div>
+            <button id="next-question-btn" class="btn btn-primary">Siguiente Pregunta</button>
+          </div>
+        </div>
+        
+        <div id="quiz-summary" class="quiz-summary" style="display:none">
+          <h3>Resultado Final</h3>
+          <p>Preguntas correctas: <span id="correct-count">0</span>/5</p>
+          <p>Puntos ganados: <span id="points-earned">0</span></p>
+          <button id="restart-quiz-btn" class="btn btn-primary">Nuevo Quiz</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Página de Retos -->
+    <section id="retos-page" class="page">
+      <div class="challenges-container">
+        <h2>Retos de Cálculo</h2>
+        <p>Completa estos desafíos para poner a prueba tus habilidades y ganar puntos.</p>
+        
+        <div id="challenges-list" class="challenges-list">
+          <!-- Los retos se generarán dinámicamente -->
+        </div>
+        
+        <div id="challenge-detail" class="challenge-detail" style="display:none">
+          <h3 id="challenge-title"></h3>
+          <div id="challenge-question"></div>
+          <div id="challenge-formula" class="formula-display"></div>
+          
+          <div id="challenge-options" class="options-container">
+            <!-- Las opciones se generarán dinámicamente -->
+          </div>
+          
+          <div class="challenge-actions">
+            <button id="verify-challenge-btn" class="btn btn-primary">Verificar Respuesta</button>
+          </div>
+          
+          <div id="challenge-result" class="challenge-result" style="display:none">
+            <div id="challenge-status" class="result-status"></div>
+            <div id="challenge-correct-answer" class="correct-answer"></div>
+            <div id="challenge-explanation" class="explanation"></div>
+            <button id="try-again-btn" class="btn btn-secondary">Intentar de nuevo</button>
+            <button id="back-to-challenges-btn" class="btn btn-primary">Volver a Retos</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Página de Juegos de Historia -->
+    <section id="juegos-historia-page" class="page">
+      <div class="game-container">
+        <h2>Juegos de Historia</h2>
+        <p>Aprende conceptos de cálculo a través de historias interactivas.</p>
+        
+        <div id="scenarios-list" class="scenarios-list">
+          <div class="scenario-card" data-scenario-id="1">
+            <h3>La Nave del Futuro</h3>
+            <p>Explora conceptos de velocidad y aceleración a través de una misión espacial.</p>
+            <img src="img/nave-futuro.jpg" alt="Nave espacial futurista">
+            <button class="btn btn-primary select-scenario-btn">Seleccionar</button>
+          </div>
+          
+          <div class="scenario-card" data-scenario-id="2">
+            <h3>El Laboratorio de Límites</h3>
+            <p>Descubre cómo resolver límites mientras ayudas a un científico a completar sus experimentos.</p>
+            <img src="img/laboratorio-limites.jpg" alt="Laboratorio futurista">
+            <button class="btn btn-primary select-scenario-btn">Seleccionar</button>
+          </div>
+        </div>
+        
+        <div id="story-detail" class="story-detail" style="display:none">
+          <h3 id="story-title"></h3>
+          <div id="story-content" class="story-content"></div>
+          <div id="story-example" class="story-example"></div>
+          
+          <div id="story-question-section" class="story-question-section">
+            <h4 id="question-prompt"></h4>
+            <div id="story-question" class="story-question"></div>
+            <div id="story-formula" class="formula-display"></div>
+            
+            <div id="story-options" class="options-container">
+              <!-- Las opciones se generarán dinámicamente -->
+            </div>
+            
+            <button id="verify-story-answer-btn" class="btn btn-primary">Verificar Respuesta</button>
+          </div>
+          
+          <div id="story-result" class="story-result" style="display:none">
+            <div id="story-status" class="result-status"></div>
+            <div id="story-explanation" class="explanation"></div>
+            <button id="continue-story-btn" class="btn btn-primary">Continuar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Página de Ranking -->
+    <section id="ranking-page" class="page">
+      <div class="leaderboard-container">
+        <h2>Ranking de Usuarios</h2>
+        <div class="leaderboard-table-container">
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th>Posición</th>
+                <th>Usuario</th>
+                <th>Puntos</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-body">
+              <!-- Los datos del ranking se generarán dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 CyberCalc - Aprende Cálculo</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/math-utils.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
