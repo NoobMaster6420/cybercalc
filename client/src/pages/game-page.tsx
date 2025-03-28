@@ -189,74 +189,74 @@ const storyScenarios = [
   },
   {
     id: 3,
-    title: "La Ciudad de las Funciones",
-    description: "Explora una metrópolis futurista donde cada edificio representa una función matemática y debes aplicar tus conocimientos para resolver misterios.",
-    image: "🏙️",
+    title: "La Academia Ruffini",
+    description: "Adéntrate en una escuela de élite donde el maestro Ruffini enseña métodos poderosos para factorizar polinomios y resolver ecuaciones.",
+    image: "🧮",
     stories: [
       {
-        id: "functions-intro",
-        title: "Episodio 1: Bienvenido a Mathópolis",
-        content: "Detective, bienvenido a Mathópolis, la ciudad donde cada edificio y estructura representa una función matemática. Como investigador especial, tu misión es resolver misterios matemáticos que están afectando a la ciudad.\n\nPara empezar, debes entender que cada función tiene su dominio (el terreno sobre el que está construida) y su rango (la altura a la que puede llegar). Algunas funciones son continuas, con estructuras fluidas, mientras que otras presentan discontinuidades y saltos abruptos.",
-        example: "f(x) = x^3 - 3x^2 + 2x",
-        solution: "Dominio: ℝ (todos los reales)\nCeros: x = 0, x = 1, x = 2\nPuntos críticos: x ≈ 0.42 y x ≈ 1.58",
-        explanation: "Las funciones polinómicas tienen como dominio todos los números reales. Sus ceros son los valores donde la función es igual a cero. Los puntos críticos representan máximos, mínimos o puntos de inflexión.",
-        questionPrompt: "El edificio principal de la ciudad está inestable. ¡Determina sus puntos críticos!",
+        id: "ruffini-intro",
+        title: "Episodio 1: El Método de Ruffini",
+        content: "Bienvenido a la Academia Ruffini, estudiante. El profesor Paolo Ruffini ha desarrollado un método elegante para dividir polinomios cuando el divisor es de la forma (x - a).\n\nEste método nos permite factorizar polinomios de forma rápida y verificar si un número es raíz de una ecuación polinómica. Si al dividir P(x) entre (x - a) obtenemos resto cero, entonces a es una raíz del polinomio y (x - a) es un factor del mismo.",
+        example: "P(x) = x^3 - 6x^2 + 11x - 6",
+        solution: "Para dividir entre (x - 1):\n1 | 1  -6  11  -6\n  |    1  -5   6\n  | 1  -5   6   0",
+        explanation: "Al dividir P(x) = x³ - 6x² + 11x - 6 entre (x - 1), obtenemos resto 0. Esto significa que 1 es raíz de P(x) y que P(x) = (x - 1)(x² - 5x + 6).",
+        questionPrompt: "El profesor Ruffini te desafía a factorizar este polinomio. ¡Utiliza su método!",
         question: {
           id: 17,
-          question: "El 'Edificio Central' de Mathópolis tiene la forma f(x) = x³ - 6x² + 9x + 1. ¿Cuáles son sus puntos críticos (donde f'(x) = 0)?",
-          formula: "f(x) = x^3 - 6x^2 + 9x + 1",
+          question: "Utiliza el método de Ruffini para verificar si x = 2 es raíz del polinomio P(x) = x³ - 3x² - 10x + 24 y determina el polinomio cociente.",
+          formula: "P(x) = x^3 - 3x^2 - 10x + 24",
           options: [
-            { id: "a", formula: "x = 1 \\text{ y } x = 3" },
-            { id: "b", formula: "x = 0 \\text{ y } x = 3" },
-            { id: "c", formula: "x = 1 \\text{ y } x = 2" },
-            { id: "d", formula: "x = 2 \\text{ y } x = 4" }
+            { id: "a", formula: "\\text{x = 2 es raíz y } P(x) = (x - 2)(x^2 - x - 12)" },
+            { id: "b", formula: "\\text{x = 2 es raíz y } P(x) = (x - 2)(x^2 + x - 12)" },
+            { id: "c", formula: "\\text{x = 2 no es raíz}" },
+            { id: "d", formula: "\\text{x = 2 es raíz y } P(x) = (x - 2)(x^2 - 5x + 12)" }
           ],
           correctOptionId: "a",
-          explanation: "Calculamos la derivada: f'(x) = 3x² - 12x + 9\nIgualamos a cero: 3x² - 12x + 9 = 0\nFactorizamos: 3(x² - 4x + 3) = 0\nResolvemos: 3(x - 1)(x - 3) = 0\nPor lo tanto, x = 1 y x = 3 son los puntos críticos."
+          explanation: "Aplicamos Ruffini con a = 2:\n2 | 1  -3  -10  24\n  |    2  -2  -24\n  | 1  -1  -12   0\nComo el resto es 0, x = 2 es raíz y el cociente es x² - x - 12\nPor tanto: P(x) = (x - 2)(x² - x - 12)"
         }
       },
       {
-        id: "continuity-investigation",
-        title: "Episodio 2: El Misterio de la Continuidad",
-        content: "Detective, tenemos un problema en el Distrito Racional de Mathópolis. Algunas estructuras muestran discontinuidades que provocan inestabilidad. Tu misión es analizar estas funciones para determinar dónde son continuas y dónde presentan problemas.\n\nPara que una función sea continua en un punto, debe cumplir tres condiciones: la función debe estar definida en ese punto, el límite debe existir en ese punto, y el valor de la función debe coincidir con el límite. Las discontinuidades pueden ser removibles (agujeros) o no removibles (saltos o asíntotas).",
-        example: "g(x) = \\frac{x^2 - 4}{x - 2}",
-        solution: "g(x) = \\frac{(x-2)(x+2)}{x-2} = x+2 para x ≠ 2\nEn x = 2 hay una discontinuidad removible\nSi g(2) = 4, la función se vuelve continua",
-        explanation: "Esta función tiene una indeterminación 0/0 en x = 2, pero simplifica a x+2 para x ≠ 2. La discontinuidad es removible porque podemos definir un valor que la haga continua.",
-        questionPrompt: "Un edificio en el Distrito Racional muestra inestabilidad. ¡Analiza su continuidad!",
+        id: "teorema-factor",
+        title: "Episodio 2: El Teorema del Factor",
+        content: "Muy bien, estudiante. Ahora profundizaremos en el Teorema del Factor, que establece que un polinomio P(x) es divisible entre (x - a) si y solo si P(a) = 0.\n\nEste teorema es el fundamento del método de Ruffini y nos permite factorizar polinomios encontrando sus raíces. Una vez que encontramos una raíz 'a', podemos escribir P(x) = (x - a)·Q(x), donde Q(x) es el polinomio cociente que obtenemos con el método de Ruffini.",
+        example: "P(x) = x^3 - 4x^2 + x + 6",
+        solution: "Probamos con x = 2:\n2 | 1  -4   1   6\n  |    2  -4  -6\n  | 1  -2  -3   0",
+        explanation: "Como el resto es 0, x = 2 es raíz de P(x). El polinomio cociente es x² - 2x - 3, así que P(x) = (x - 2)(x² - 2x - 3). Podemos seguir factorizando: P(x) = (x - 2)(x - 3)(x + 1).",
+        questionPrompt: "Hay un polinomio con raíces ocultas. ¡Usa el teorema del factor para encontrarlas!",
         question: {
           id: 18,
-          question: "El 'Edificio Fraccionario' tiene la forma h(x) = (x² - 1)/(x - 1). ¿Dónde tiene una discontinuidad y de qué tipo es?",
-          formula: "h(x) = \\frac{x^2 - 1}{x - 1}",
+          question: "El polinomio P(x) = x³ - x² - 4x + 4 tiene a x = 2 como una de sus raíces. Encuentra las otras raíces y la factorización completa.",
+          formula: "P(x) = x^3 - x^2 - 4x + 4",
           options: [
-            { id: "a", formula: "Discontinuidad removible en x = 1" },
-            { id: "b", formula: "Discontinuidad no removible en x = 1" },
-            { id: "c", formula: "Discontinuidad removible en x = -1" },
-            { id: "d", formula: "No tiene discontinuidades" }
+            { id: "a", formula: "P(x) = (x - 2)(x - 2)(x + 1)" },
+            { id: "b", formula: "P(x) = (x - 2)(x - 1)(x + 2)" },
+            { id: "c", formula: "P(x) = (x - 2)(x + 1)(x + 2)" },
+            { id: "d", formula: "P(x) = (x - 2)(x - 2)(x - 1)" }
           ],
-          correctOptionId: "a",
-          explanation: "Factorizamos: h(x) = (x² - 1)/(x - 1) = ((x - 1)(x + 1))/(x - 1) = x + 1 para x ≠ 1\nEn x = 1, la función no está definida, pero podríamos definir h(1) = 2 para hacerla continua.\nPor lo tanto, tiene una discontinuidad removible en x = 1."
+          correctOptionId: "b",
+          explanation: "Aplicamos Ruffini con a = 2:\n2 | 1  -1  -4   4\n  |    2   2  -4\n  | 1   1  -2   0\nEl polinomio cociente es x² + x - 2 = (x - 1)(x + 2)\nPor tanto: P(x) = (x - 2)(x - 1)(x + 2)"
         }
       },
       {
-        id: "extreme-values",
-        title: "Episodio 3: El Caso de los Valores Extremos",
-        content: "Detective, se ha reportado un problema en el Distrito de Optimización. Necesitamos encontrar los valores extremos de varias estructuras para garantizar su estabilidad y eficiencia.\n\nLos valores extremos son los máximos y mínimos de una función. Para encontrarlos, primero hallamos los puntos críticos (donde la derivada es cero) y luego determinamos si son máximos (segunda derivada negativa) o mínimos (segunda derivada positiva). También debemos verificar los extremos del dominio.",
-        example: "f(x) = x^3 - 3x^2 - 9x + 5 en [-2, 4]",
-        solution: "f'(x) = 3x^2 - 6x - 9\nf'(x) = 0 en x = -1 y x = 3\nf''(-1) = -12 < 0 (máximo local)\nf''(3) = 12 > 0 (mínimo local)\nMáximo global: f(-1) = 10\nMínimo global: f(-2) = -15",
-        explanation: "Para encontrar valores extremos, calculamos puntos críticos y evaluamos la función en esos puntos y en los extremos del dominio. Luego comparamos para determinar máximos y mínimos globales.",
-        questionPrompt: "El Rascacielos Cuadrático necesita una evaluación de estabilidad. ¡Encuentra sus valores extremos!",
+        id: "ecuaciones-cubicas",
+        title: "Episodio 3: Resolviendo Ecuaciones Cúbicas",
+        content: "Excelente progreso, estudiante. Ahora aplicaremos el método de Ruffini para resolver ecuaciones cúbicas completas. Cuando enfrentamos una ecuación de tercer grado, podemos intentar encontrar una raíz por tanteo o utilizando el teorema del valor racional.\n\nEl teorema del valor racional nos dice que si un polinomio con coeficientes enteros tiene una raíz racional p/q (en su forma irreducible), entonces p divide al término independiente y q divide al coeficiente principal.",
+        example: "x^3 - 7x - 6 = 0",
+        solution: "Posibles raíces racionales: ±1, ±2, ±3, ±6\nProbamos con x = 3:\n3 | 1   0  -7  -6\n  |    3   9   6\n  | 1   3   2   0",
+        explanation: "Como el resto es 0, x = 3 es una raíz. El polinomio se factoriza como (x - 3)(x² + 3x + 2) = (x - 3)(x + 1)(x + 2). Por tanto, las raíces son x = 3, x = -1 y x = -2.",
+        questionPrompt: "Una ecuación cúbica misteriosa ha aparecido. ¡Resuélvela usando el método de Ruffini!",
         question: {
           id: 19,
-          question: "El 'Rascacielos Cuadrático' tiene la forma f(x) = 2x² - 8x + 3 en el intervalo [0, 5]. ¿Cuáles son sus valores mínimo y máximo?",
-          formula: "f(x) = 2x^2 - 8x + 3, \\quad x \\in [0, 5]",
+          question: "Resuelve la ecuación x³ - 6x² + 11x - 6 = 0 utilizando el método de Ruffini, sabiendo que una de sus raíces es x = 1.",
+          formula: "x^3 - 6x^2 + 11x - 6 = 0",
           options: [
-            { id: "a", formula: "\\text{Mínimo: } -5 \\text{ en } x = 2, \\text{ Máximo: } 3 \\text{ en } x = 0" },
-            { id: "b", formula: "\\text{Mínimo: } -5 \\text{ en } x = 2, \\text{ Máximo: } 43 \\text{ en } x = 5" },
-            { id: "c", formula: "\\text{Mínimo: } 3 \\text{ en } x = 0, \\text{ Máximo: } 43 \\text{ en } x = 5" },
-            { id: "d", formula: "\\text{Mínimo: } -5 \\text{ en } x = 2, \\text{ Máximo: } 23 \\text{ en } x = 5" }
+            { id: "a", formula: "x = 1, x = 2, x = 3" },
+            { id: "b", formula: "x = 1, x = 1, x = 6" },
+            { id: "c", formula: "x = 1, x = 2, x = 6" },
+            { id: "d", formula: "x = 1, x = 3, x = 2" }
           ],
-          correctOptionId: "b",
-          explanation: "Calculamos la derivada: f'(x) = 4x - 8\nIgualamos a cero: 4x - 8 = 0 ⟹ x = 2\nVerificamos: f''(x) = 4 > 0, por lo que x = 2 es un mínimo.\nEvaluamos en los puntos críticos y extremos:\nf(0) = 3\nf(2) = -5\nf(5) = 13\nPor lo tanto, el mínimo es -5 en x = 2 y el máximo es 13 en x = 5."
+          correctOptionId: "a",
+          explanation: "Aplicamos Ruffini con a = 1:\n1 | 1  -6  11  -6\n  |    1  -5   6\n  | 1  -5   6   0\nEl polinomio cociente es x² - 5x + 6 = (x - 2)(x - 3)\nPor tanto, las raíces de la ecuación son x = 1, x = 2 y x = 3"
         }
       }
     ]
