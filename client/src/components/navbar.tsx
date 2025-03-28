@@ -18,7 +18,7 @@ export default function Navbar() {
     queryKey: ["/api/user/progress"],
     enabled: !!user,
   });
-  
+
   // Effect para actualizar la caché del usuario cuando cambia el progreso
   useEffect(() => {
     if (user && userProgress) {
@@ -73,13 +73,12 @@ export default function Navbar() {
               </Link>
             </div>
           </div>
-          
+
           <div className="hidden sm:ml-6 sm:flex sm:items-center gap-2">
-            {/* Controles de tema y sonido */}
+            {/* Controles de sonido */}
             <div className="flex items-center gap-2 mr-2">
-              <ThemeToggle />
             </div>
-            
+
             {user && (
               <>
                 <div id="user-stats" className="flex items-center mr-4 px-3 py-2 bg-cyberdark border border-cyberprimary rounded-lg shadow-neon-blue">
@@ -101,7 +100,7 @@ export default function Navbar() {
               </>
             )}
           </div>
-          
+
           <div className="flex items-center sm:hidden">
             <button 
               type="button" 
@@ -140,14 +139,13 @@ export default function Navbar() {
           <Link href="/juegos-historia">
             <a onClick={closeMenu} className="block px-4 py-3 rounded-md text-blue-400 font-bold bg-gradient-to-r from-blue-900 to-purple-900 hover:from-blue-700 hover:to-purple-700 border-2 border-blue-500 hover:text-white shadow-lg shadow-blue-700/50 hover:shadow-blue-600/80 transform hover:scale-105 animate-pulse">JUEGOS DE HISTORIA</a>
           </Link>
-          
+
           {/* Controles de tema en móvil */}
           <div className="mt-3 flex items-center justify-start gap-2 px-3 py-2">
-            <ThemeToggle />
             <span className="text-white text-sm ml-2">Cambiar tema</span>
           </div>
         </div>
-        
+
         {user && (
           <div className="pt-4 pb-3 border-t border-cyberprimary">
             <div className="flex items-center px-5">
