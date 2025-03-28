@@ -1,46 +1,46 @@
-# CyberCalc - Aplicación Educativa de Cálculo
+# CyberCalc - Aprende Cálculo
 
-Esta es una versión simplificada de CyberCalc diseñada para ser alojada en GitHub Pages. La aplicación permite a los usuarios aprender conceptos de cálculo diferencial a través de un entorno interactivo con estilo cyberpunk.
+Una aplicación educativa con estilo cyberpunk para aprender cálculo diferencial de manera interactiva. Esta aplicación incluye:
+
+- **Teoría**: Fundamentos de cálculo con explicaciones claras
+- **Quiz**: Pon a prueba tus conocimientos con preguntas de diferentes niveles
+- **Retos**: Desafíate con problemas complejos y gana puntos
+- **Juegos de Historia**: Aprende a través de historias interactivas sobre conceptos matemáticos
+- **Ranking**: Compite con otros usuarios en la tabla de clasificación
+
+## Tecnologías
+
+- HTML5
+- CSS3 (con variables y transiciones)
+- JavaScript (Vanilla)
+- KaTeX para renderización de fórmulas matemáticas
+- LocalStorage para persistencia de datos
 
 ## Características
 
-- **Teoría Interactiva**: Explicaciones claras sobre límites, derivadas y reglas de derivación.
-- **Sistema de Quiz**: Preguntas de diferentes niveles de dificultad para poner a prueba tus conocimientos.
-- **Retos Matemáticos**: Problemas complejos para desafiar tu comprensión.
-- **Juegos de Historia**: Aprende conceptos matemáticos a través de historias interactivas.
-- **Sistema de Puntos**: Gana puntos al resolver problemas correctamente.
-- **Ranking de Usuarios**: Compite con otros usuarios para llegar a lo más alto del ranking.
+- Sistema de autenticación
+- Diseño responsive
+- Modo oscuro/claro
+- Visualización de fórmulas matemáticas
+- Generación dinámica de problemas
+- Sistema de puntos y vidas
+- Juegos educativos interactivos
 
-## Tecnologías Utilizadas
+## Instalación
 
-- HTML5
-- CSS3
-- JavaScript
-- KaTeX para renderizar fórmulas matemáticas
+No se requiere instalación. Simplemente abre el archivo `index.html` en tu navegador o visita la versión desplegada en GitHub Pages.
 
-## Cómo Usar
+## Uso
 
-1. Clona este repositorio
-2. Abre el archivo `index.html` en tu navegador
-3. ¡Regístrate y comienza a aprender!
+1. Regístrate para crear una cuenta
+2. Explora las diferentes secciones: teoría, quiz, retos y juegos de historia
+3. Gana puntos resolviendo problemas correctamente
+4. Compite con otros usuarios en el ranking
 
-Alternativamene, puedes acceder a la aplicación directamente en GitHub Pages: [URL de GitHub Pages]
+## Autor
 
-## Estructura del Proyecto
+[Tu Nombre]
 
-- **css/**: Hojas de estilo
-- **js/**: Scripts de JavaScript
-  - **data.js**: Datos de la aplicación
-  - **auth.js**: Funciones de autenticación
-  - **math-utils.js**: Utilidades matemáticas
-  - **ui.js**: Funciones de interfaz de usuario
-  - **app.js**: Archivo principal de la aplicación
-- **img/**: Imágenes utilizadas en la aplicación
+## Licencia
 
-## Almacenamiento de Datos
-
-La aplicación utiliza localStorage para guardar los datos de los usuarios, puntuaciones y progreso. No se requiere una base de datos externa.
-
-## Créditos
-
-Esta aplicación fue desarrollada como un proyecto educativo para enseñar cálculo diferencial de manera interactiva.
+Este proyecto está bajo la Licencia MIT - ver el archivo LICENSE para más detalles.

@@ -2,21 +2,48 @@
 
 // Función para renderizar fórmulas LaTeX en el DOM
 function renderMathFormulas() {
-  // Usar KaTeX para renderizar todas las fórmulas matemáticas
-  document.querySelectorAll('.math-formula').forEach(elem => {
-    katex.render(elem.textContent, elem, {
-      throwOnError: false,
-      displayMode: true
+  // Verificar si KaTeX está disponible
+  if (typeof katex !== 'undefined') {
+    // Usar KaTeX para renderizar todas las fórmulas matemáticas
+    document.querySelectorAll('.math-formula').forEach(elem => {
+      katex.render(elem.textContent, elem, {
+        throwOnError: false,
+        displayMode: true
+      });
     });
-  });
+    
+    // También renderizar fórmulas en los elementos con clase .formula-display
+    document.querySelectorAll('.formula-display').forEach(elem => {
+      if (elem.textContent) {
+        katex.render(elem.textContent, elem, {
+          throwOnError: false,
+          displayMode: true
+        });
+      }
+    });
+    
+    console.log('KaTeX inicializado correctamente');
+  } else {
+    console.error('Error: KaTeX no está disponible. Las fórmulas no se mostrarán correctamente.');
+  }
 }
 
 // Función para renderizar una fórmula específica
 function renderFormula(formula, element) {
-  katex.render(formula, element, {
-    throwOnError: false,
-    displayMode: true
-  });
+  if (typeof katex !== 'undefined') {
+    try {
+      katex.render(formula, element, {
+        throwOnError: false,
+        displayMode: true
+      });
+    } catch (error) {
+      console.error('Error al renderizar fórmula:', error);
+      element.textContent = formula; // Mostrar la fórmula como texto plano si falla
+    }
+  } else {
+    console.error('Error: KaTeX no está disponible. Las fórmulas no se mostrarán correctamente.');
+    element.textContent = formula; // Mostrar la fórmula como texto plano
+  }
 }
 
 // Función para generar un número aleatorio entre min y max (inclusive)

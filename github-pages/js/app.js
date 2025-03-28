@@ -19,9 +19,40 @@ document.addEventListener('DOMContentLoaded', function() {
   // Configurar eventos de la interfaz
   setupEventListeners();
   
+  // Comprobar que KaTeX está disponible
+  checkKatexAvailability();
+  
   // Renderizar fórmulas matemáticas
   renderMathFormulas();
 });
+
+// Función para comprobar que KaTeX está disponible
+function checkKatexAvailability() {
+  if (typeof katex === 'undefined') {
+    console.error('ADVERTENCIA: KaTeX no está disponible. Intentando cargar dinámicamente...');
+    
+    // Agregar KaTeX CSS
+    const cssLink = document.createElement('link');
+    cssLink.rel = 'stylesheet';
+    cssLink.href = 'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css';
+    document.head.appendChild(cssLink);
+    
+    // Agregar KaTeX JS
+    const script1 = document.createElement('script');
+    script1.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js';
+    document.head.appendChild(script1);
+    
+    // Agregar KaTeX Auto-render JS
+    const script2 = document.createElement('script');
+    script2.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js';
+    script2.onload = function() {
+      console.log('KaTeX cargado dinámicamente');
+      // Intentar renderizar fórmulas después de cargar
+      setTimeout(renderMathFormulas, 500);
+    };
+    document.head.appendChild(script2);
+  }
+}
 
 // Configurar todos los listeners de eventos
 function setupEventListeners() {
