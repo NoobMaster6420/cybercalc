@@ -1,0 +1,79 @@
+{
+  "users": [
+    [
+      1,
+      {
+        "username": "MathWizard",
+        "password": "password",
+        "points": 1250,
+        "lives": 3,
+        "id": 1
+      }
+    ],
+    [
+      2,
+      {
+        "username": "DerivativeNinja",
+        "password": "password",
+        "points": 980,
+        "lives": 3,
+        "id": 2
+      }
+    ],
+    [
+      3,
+      {
+        "username": "CalculusKing",
+        "password": "password",
+        "points": 875,
+        "lives": 3,
+        "id": 3
+      }
+    ],
+    [
+      4,
+      {
+        "username": "DeltaMaster",
+        "password": "password",
+        "points": 740,
+        "lives": 3,
+        "id": 4
+      }
+    ],
+    [
+      5,
+      {
+        "username": "DerivativeQueen",
+        "password": "password",
+        "points": 685,
+        "lives": 3,
+        "id": 5
+      }
+    ],
+    [
+      6,
+      {
+        "username": "IntegralHero",
+        "password": "password",
+        "points": 620,
+        "lives": 3,
+        "id": 6
+      }
+    ],
+    [
+      7,
+      {
+        "username": "FunctionPro",
+        "password": "password",
+        "points": 590,
+        "lives": 3,
+        "id": 7
+      }
+    ]
+  ],
+  "quizzes": [],
+  "challenges": [],
+  "currentUserId": 8,
+  "currentQuizId": 1,
+  "currentChallengeId": 1
+}

@@ -1,8 +1,13 @@
 import { users, quizzes, challenges, type User, type InsertUser, type Quiz, type InsertQuiz, type Challenge, type InsertChallenge, type UserProgress } from "@shared/schema";
 import session from "express-session";
 import createMemoryStore from "memorystore";
+import fs from 'fs';
+import path from 'path';
 
 const MemoryStore = createMemoryStore(session);
+
+// Ruta del archivo para persistencia
+const DATA_FILE = path.join(process.cwd(), 'cybercalc_data.json');
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -19,6 +24,16 @@ export interface IStorage {
   sessionStore: any; // Soluciona el problema de tipado con SessionStore
 }
 
+// Estado para persistencia
+interface StorageState {
+  users: [number, User][];
+  quizzes: [number, Quiz][];
+  challenges: [number, Challenge][];
+  currentUserId: number;
+  currentQuizId: number;
+  currentChallengeId: number;
+}
+
 export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private quizzes: Map<number, Quiz>;
@@ -27,13 +42,15 @@ export class MemStorage implements IStorage {
   currentUserId: number;
   currentQuizId: number;
   currentChallengeId: number;
-  private persistenceKey = "cybercalc_storage_state";
 
   constructor() {
+    console.log("Inicializando almacenamiento...");
+    
     // Intentar cargar datos desde persistencia
     const savedState = this.loadState();
     
     if (savedState) {
+      console.log("Restaurando estado desde archivo...");
       // Restaurar desde el estado guardado
       this.users = new Map(savedState.users);
       this.quizzes = new Map(savedState.quizzes);
@@ -42,6 +59,7 @@ export class MemStorage implements IStorage {
       this.currentQuizId = savedState.currentQuizId;
       this.currentChallengeId = savedState.currentChallengeId;
     } else {
+      console.log("Inicializando con valores predeterminados...");
       // Inicializar con valores predeterminados
       this.users = new Map();
       this.quizzes = new Map();
@@ -74,12 +92,15 @@ export class MemStorage implements IStorage {
     this.sessionStore = new MemoryStore({
       checkPeriod: 86400000 // One day
     });
+    
+    console.log(`Almacenamiento inicializado con ${this.users.size} usuarios`);
   }
   
   // Métodos de persistencia
   private saveState(): void {
     try {
-      const state = {
+      console.log("Guardando estado a archivo...");
+      const state: StorageState = {
         users: Array.from(this.users.entries()),
         quizzes: Array.from(this.quizzes.entries()),
         challenges: Array.from(this.challenges.entries()),
@@ -88,22 +109,24 @@ export class MemStorage implements IStorage {
         currentChallengeId: this.currentChallengeId
       };
       
-      // Si estamos en un entorno Node.js, podemos guardar el estado en un archivo
-      // Para simplificar, usamos una variable global para simular persistencia entre reinicios
-      if (typeof global !== 'undefined') {
-        (global as any).__cybercalcStorageState = state;
-      }
+      // Guardar a archivo
+      fs.writeFileSync(DATA_FILE, JSON.stringify(state, null, 2), 'utf8');
+      console.log("Estado guardado correctamente");
     } catch (error) {
       console.error("Error al guardar el estado:", error);
     }
   }
   
-  private loadState(): any {
+  private loadState(): StorageState | null {
     try {
-      // Si estamos en un entorno Node.js, podemos cargar el estado desde un archivo o variable global
-      if (typeof global !== 'undefined' && (global as any).__cybercalcStorageState) {
-        return (global as any).__cybercalcStorageState;
+      console.log("Intentando cargar datos desde archivo...");
+      // Verificar si existe el archivo
+      if (fs.existsSync(DATA_FILE)) {
+        console.log("Archivo de datos encontrado, cargando...");
+        const data = fs.readFileSync(DATA_FILE, 'utf8');
+        return JSON.parse(data) as StorageState;
       }
+      console.log("No se encontró el archivo de datos");
       return null;
     } catch (error) {
       console.error("Error al cargar el estado:", error);

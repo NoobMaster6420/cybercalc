@@ -5,25 +5,36 @@ import { Button } from './button';
 export function ThemeToggle() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   
-  // Cargar el tema desde localStorage
+  // Función para aplicar tema
+  const applyTheme = (isDark: boolean) => {
+    // Remover clases anteriores
+    document.documentElement.classList.remove('light-theme', 'dark-theme');
+    
+    // Aplicar la nueva clase
+    if (isDark) {
+      document.documentElement.classList.add('dark-theme');
+    } else {
+      document.documentElement.classList.add('light-theme');
+    }
+    
+    // Guardar preferencia
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  };
+  
+  // Cargar el tema desde localStorage al iniciar
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setIsDarkMode(savedTheme === 'dark');
-      document.documentElement.classList.toggle('light-theme', savedTheme === 'light');
-      document.documentElement.classList.toggle('dark-theme', savedTheme === 'dark');
-    }
+    // Si no hay tema guardado, usar dark por defecto
+    const prefersDark = savedTheme ? savedTheme === 'dark' : true;
+    
+    setIsDarkMode(prefersDark);
+    applyTheme(prefersDark);
   }, []);
   
-  // Guardar el tema en localStorage
-  useEffect(() => {
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    document.documentElement.classList.toggle('light-theme', !isDarkMode);
-    document.documentElement.classList.toggle('dark-theme', isDarkMode);
-  }, [isDarkMode]);
-  
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    applyTheme(newMode);
   };
   
   return (
@@ -32,6 +43,7 @@ export function ThemeToggle() {
       size="icon"
       variant="outline"
       className="bg-cyberbg border-blue-500 hover:bg-cyberdark"
+      title={isDarkMode ? "Cambiar a tema claro" : "Cambiar a tema oscuro"}
     >
       {isDarkMode ? (
         <Sun className="h-4 w-4 text-yellow-400" />

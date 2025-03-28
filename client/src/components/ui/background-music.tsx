@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import ReactAudioPlayer from 'react-audio-player';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from './button';
 import { Volume2, VolumeX } from 'lucide-react';
 
@@ -8,25 +7,53 @@ const BACKGROUND_MUSIC_URL = 'https://cdn.pixabay.com/download/audio/2022/01/28/
 
 export function BackgroundMusic() {
   const [isMuted, setIsMuted] = useState(true);
-  const [audioVolume, setAudioVolume] = useState(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   
-  // Cargar el estado de silencio desde localStorage
+  // Inicializar el elemento de audio
   useEffect(() => {
+    // Crear un elemento de audio
+    const audioElement = new Audio(BACKGROUND_MUSIC_URL);
+    audioElement.loop = true;
+    audioElement.volume = 0;
+    audioRef.current = audioElement;
+    
+    // Cargar el estado de silencio desde localStorage
     const savedMuteState = localStorage.getItem('backgroundMusicMuted');
     if (savedMuteState) {
-      setIsMuted(savedMuteState === 'true');
-      setAudioVolume(savedMuteState === 'true' ? 0 : 0.3);
+      const shouldBeMuted = savedMuteState === 'true';
+      setIsMuted(shouldBeMuted);
+      if (!shouldBeMuted) {
+        audioElement.volume = 0.3;
+        audioElement.play().catch(e => console.error('Error al reproducir audio:', e));
+      }
     }
+    
+    // Limpiar al desmontar
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
   }, []);
   
-  // Guardar el estado de silencio en localStorage
+  // Guardar el estado de silencio en localStorage y controlar reproducción
   useEffect(() => {
     localStorage.setItem('backgroundMusicMuted', isMuted.toString());
+    
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.volume = 0;
+        audioRef.current.pause();
+      } else {
+        audioRef.current.volume = 0.3;
+        audioRef.current.play().catch(e => console.error('Error al reproducir audio:', e));
+      }
+    }
   }, [isMuted]);
   
   const toggleMute = () => {
     setIsMuted(!isMuted);
-    setAudioVolume(!isMuted ? 0 : 0.3);
   };
   
   return (
@@ -39,14 +66,6 @@ export function BackgroundMusic() {
       >
         {isMuted ? <VolumeX className="h-4 w-4 text-gray-400" /> : <Volume2 className="h-4 w-4 text-blue-400" />}
       </Button>
-      
-      <ReactAudioPlayer
-        src={BACKGROUND_MUSIC_URL}
-        autoPlay
-        loop
-        volume={audioVolume}
-        style={{ display: 'none' }}
-      />
     </div>
   );
 }
