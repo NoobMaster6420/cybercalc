@@ -7,40 +7,42 @@ const BACKGROUND_MUSIC_URL = 'https://cdn.pixabay.com/download/audio/2022/01/28/
 
 export function BackgroundMusic() {
   const [isMuted, setIsMuted] = useState(true);
-  const [isLoaded, setIsLoaded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    const audio = new Audio(BACKGROUND_MUSIC_URL);
+    const audio = new Audio();
+    audio.src = BACKGROUND_MUSIC_URL;
     audio.loop = true;
     audio.volume = 0.3;
-    
-    audio.addEventListener('canplaythrough', () => {
-      setIsLoaded(true);
-    });
-
     audioRef.current = audio;
+
+    // Precargar el audio
+    audio.load();
 
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
-        audioRef.current.remove();
       }
     };
   }, []);
 
-  const toggleMute = async () => {
-    if (!audioRef.current || !isLoaded) return;
+  const toggleMute = () => {
+    if (!audioRef.current) return;
 
-    try {
-      if (isMuted) {
-        await audioRef.current.play();
-      } else {
-        audioRef.current.pause();
+    if (isMuted) {
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsMuted(false);
+          })
+          .catch(error => {
+            console.error("Error reproduciendo audio:", error);
+          });
       }
-      setIsMuted(!isMuted);
-    } catch (error) {
-      console.error('Error al reproducir audio:', error);
+    } else {
+      audioRef.current.pause();
+      setIsMuted(true);
     }
   };
 
@@ -50,7 +52,6 @@ export function BackgroundMusic() {
         variant="outline"
         size="icon"
         onClick={toggleMute}
-        disabled={!isLoaded}
         className="bg-cyberdark border-cyberprimary hover:bg-cyberaccent"
       >
         {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
