@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Button } from './button';
 import { Volume2, VolumeX } from 'lucide-react';
@@ -6,33 +7,41 @@ const BACKGROUND_MUSIC_URL = 'https://cdn.pixabay.com/download/audio/2022/01/28/
 
 export function BackgroundMusic() {
   const [isMuted, setIsMuted] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    audioRef.current = new Audio(BACKGROUND_MUSIC_URL);
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.3;
+    const audio = new Audio(BACKGROUND_MUSIC_URL);
+    audio.loop = true;
+    audio.volume = 0.3;
+    
+    audio.addEventListener('canplaythrough', () => {
+      setIsLoaded(true);
+    });
+
+    audioRef.current = audio;
 
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
-        audioRef.current = null;
+        audioRef.current.remove();
       }
     };
   }, []);
 
-  useEffect(() => {
-    if (audioRef.current) {
-      if (!isMuted) {
-        audioRef.current.play().catch(e => console.error('Error al reproducir audio:', e));
+  const toggleMute = async () => {
+    if (!audioRef.current || !isLoaded) return;
+
+    try {
+      if (isMuted) {
+        await audioRef.current.play();
       } else {
         audioRef.current.pause();
       }
+      setIsMuted(!isMuted);
+    } catch (error) {
+      console.error('Error al reproducir audio:', error);
     }
-  }, [isMuted]);
-
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
   };
 
   return (
@@ -41,6 +50,7 @@ export function BackgroundMusic() {
         variant="outline"
         size="icon"
         onClick={toggleMute}
+        disabled={!isLoaded}
         className="bg-cyberdark border-cyberprimary hover:bg-cyberaccent"
       >
         {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
