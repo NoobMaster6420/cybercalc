@@ -2,7 +2,9 @@
 
 Una plataforma educativa interactiva para aprender cálculo diferencial a través de una interfaz inmersiva inspirada en el cyberpunk. La aplicación utiliza tecnologías web de vanguardia para transformar el aprendizaje matemático en una experiencia atractiva y visualmente dinámica.
 
-![CyberCalc](generated-icon.png)
+## Demo
+
+![CyberCalc Preview](attached_assets/image_1743348483620.png)
 
 ## Características principales
 
@@ -35,7 +37,7 @@ Una plataforma educativa interactiva para aprender cálculo diferencial a travé
 
 1. Clona este repositorio:
    ```
-   git clone https://github.com/tu-usuario/cybercalc.git
+   git clone https://github.com/NoobMaster6420/cybercalc.git
    cd cybercalc
    ```
 
