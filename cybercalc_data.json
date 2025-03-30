@@ -1,0 +1,155 @@
+{
+  "users": [
+    [
+      1,
+      {
+        "username": "MathWizard",
+        "password": "password",
+        "points": 1250,
+        "lives": 3,
+        "id": 1
+      }
+    ],
+    [
+      2,
+      {
+        "username": "DerivativeNinja",
+        "password": "password",
+        "points": 980,
+        "lives": 3,
+        "id": 2
+      }
+    ],
+    [
+      3,
+      {
+        "username": "CalculusKing",
+        "password": "password",
+        "points": 875,
+        "lives": 3,
+        "id": 3
+      }
+    ],
+    [
+      4,
+      {
+        "username": "DeltaMaster",
+        "password": "password",
+        "points": 740,
+        "lives": 3,
+        "id": 4
+      }
+    ],
+    [
+      5,
+      {
+        "username": "DerivativeQueen",
+        "password": "password",
+        "points": 685,
+        "lives": 3,
+        "id": 5
+      }
+    ],
+    [
+      6,
+      {
+        "username": "IntegralHero",
+        "password": "password",
+        "points": 620,
+        "lives": 3,
+        "id": 6
+      }
+    ],
+    [
+      7,
+      {
+        "username": "FunctionPro",
+        "password": "password",
+        "points": 590,
+        "lives": 3,
+        "id": 7
+      }
+    ],
+    [
+      8,
+      {
+        "username": "cesar",
+        "password": "08640ae4dd6b0fba226f8cd5a173b6bd685b9f0b4f0179004cabc41e0124cf5273e94af24e3d00c9b784e1160f5134c891a2c47e3565be7c23301f0ce77e2092.ddbb801ecf40bb32610c5cdaa899f4b5",
+        "id": 8,
+        "points": 170,
+        "lives": 3
+      }
+    ],
+    [
+      9,
+      {
+        "username": "Juan",
+        "password": "ffabd2d53d605398705cc717efa6bfad5ef149c7740746ca59fa72b6af831fe08b9a9d7e4eb43df6c101ab32d2eebfd4a346a93015cbaf128205946204912a9f.deed6cd79fc7956272b9ed8a01c4c7d0",
+        "id": 9,
+        "points": 0,
+        "lives": 3
+      }
+    ],
+    [
+      10,
+      {
+        "username": "cesar ",
+        "password": "65b18f6a3b43b81ee9ae5c15fbe3c651f16704ac623f5d2403c3ad66d3e83a561b5602169e2b0939cbde7292929299638174e1584b253b8fd4fe18b36716389b.4c306bfc458e207cc3cb4198ebcb8587",
+        "id": 10,
+        "points": 0,
+        "lives": 3
+      }
+    ]
+  ],
+  "quizzes": [],
+  "challenges": [
+    [
+      1,
+      {
+        "userId": 8,
+        "score": 35,
+        "completedAt": "2025-03-29T03:17:58.273Z",
+        "id": 1
+      }
+    ],
+    [
+      2,
+      {
+        "userId": 8,
+        "score": 35,
+        "completedAt": "2025-03-29T03:18:02.140Z",
+        "id": 2
+      }
+    ],
+    [
+      3,
+      {
+        "userId": 8,
+        "score": 30,
+        "completedAt": "2025-03-29T03:18:13.769Z",
+        "id": 3
+      }
+    ],
+    [
+      4,
+      {
+        "userId": 8,
+        "score": 35,
+        "completedAt": "2025-03-29T03:18:27.005Z",
+        "id": 4
+      }
+    ],
+    [
+      5,
+      {
+        "userId": 8,
+        "score": 35,
+        "completedAt": "2025-03-29T03:18:33.203Z",
+        "id": 5
+      }
+    ]
+  ],
+  "currentUserId": 11,
+  "currentQuizId": 1,
+  "currentChallengeId": 6
+}
