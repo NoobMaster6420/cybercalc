@@ -2,7 +2,9 @@
 
 Una plataforma educativa interactiva para aprender cálculo diferencial a través de una interfaz inmersiva inspirada en el cyberpunk. La aplicación utiliza tecnologías web de vanguardia para transformar el aprendizaje matemático en una experiencia atractiva y visualmente dinámica.
 
-![CyberCalc](generated-icon.png)
+<div align="center">
+  <img src="public/logo.svg" alt="CyberCalc Logo" width="200" height="200">
+</div>
 
 ## Características principales
 
@@ -78,6 +80,31 @@ Para construir la aplicación para producción:
 ```
 npm run build
 npm start
+```
+
+## Subir a GitHub
+
+Puedes usar el script incluido para inicializar y configurar el repositorio Git:
+
+```bash
+# Hacer el script ejecutable (si no lo has hecho)
+chmod +x init-git.sh
+
+# Ejecutar el script
+./init-git.sh
+```
+
+El script te pedirá tu nombre de usuario de GitHub y el nombre del repositorio, y configurará todo lo necesario para que puedas hacer push a GitHub.
+
+Alternativamente, puedes hacerlo manualmente:
+
+```bash
+git init
+git add .
+git commit -m "Primer commit: CyberCalc"
+git remote add origin https://github.com/tu-usuario/cybercalc.git
+git branch -M main
+git push -u origin main
 ```
 
 ## Licencia

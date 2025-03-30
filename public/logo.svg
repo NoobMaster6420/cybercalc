@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="100" fill="#1E1E2E"/>
+  <rect x="60" y="60" width="392" height="392" rx="70" stroke="#9D4EDD" stroke-width="20"/>
+  <rect x="120" y="120" width="272" height="80" rx="20" stroke="#9D4EDD" stroke-width="16"/>
+  <rect x="340" y="140" width="40" height="40" rx="10" fill="#9D4EDD"/>
+  <circle cx="140" cy="220" r="20" stroke="#9D4EDD" stroke-width="12"/>
+  <circle cx="210" cy="220" r="20" stroke="#9D4EDD" stroke-width="12"/>
+  <circle cx="280" cy="220" r="20" stroke="#9D4EDD" stroke-width="12"/>
+  <circle cx="350" cy="220" r="20" stroke="#9D4EDD" stroke-width="12"/>
+  <circle cx="140" cy="290" r="20" stroke="#9D4EDD" stroke-width="12"/>
+  <circle cx="210" cy="290" r="20" stroke="#9D4EDD" stroke-width="12"/>
+  <circle cx="280" cy="290" r="20" stroke="#9D4EDD" stroke-width="12"/>
+  <circle cx="350" cy="290" r="20" stroke="#9D4EDD" stroke-width="12"/>
+  <circle cx="140" cy="360" r="20" stroke="#9D4EDD" stroke-width="12"/>
+  <circle cx="210" cy="360" r="20" stroke="#9D4EDD" stroke-width="12"/>
+  <circle cx="280" cy="360" r="20" stroke="#9D4EDD" stroke-width="12"/>
+  <path d="M350 320V400" stroke="#9D4EDD" stroke-width="16" stroke-linecap="round"/>
+  <path d="M350 320L350 400" stroke="#9D4EDD" stroke-width="16" stroke-linecap="round"/>
+  <path d="M320 360L380 360" stroke="#9D4EDD" stroke-width="16" stroke-linecap="round"/>
+</svg>
